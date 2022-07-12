@@ -1,15 +1,17 @@
-import React,{FC} from 'react';
+import React, {FC, FocusEventHandler} from 'react';
 
 interface IInput{
     type:string;
     placeholder:string;
     value?:string|any;
     onChange?:React.ChangeEventHandler | undefined;
+    name?:string;
+    onBlur?:React.EventHandler<any>
 }
 
-const Input:FC<IInput> = ({type,placeholder,value,onChange}) => {
+const Input:FC<IInput> = ({onBlur,type,name,placeholder,value,onChange}) => {
     return (
-        <input value={value} type={type} placeholder={placeholder} onChange={onChange}/>
+        <input onBlur={onBlur} value={value} type={type} placeholder={placeholder} onChange={onChange} name={name}/>
     );
 };
 

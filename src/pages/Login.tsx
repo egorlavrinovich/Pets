@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {FC, FocusEventHandler, useEffect} from 'react';
 import '../SCSS/style.scss'
 import {useState} from "react";
 import Input from "../components/UI/Input/Input";
-import {IUser} from "../types/types";
+import {IUser,IValidationform} from "../types/types";
 import { useForm, SubmitHandler } from "react-hook-form";
 const Login = () => {
         const [data,setdata] = useState<boolean>(false)
@@ -10,23 +10,45 @@ const Login = () => {
         function SendAllData():IUser|null{
                return user
         }
+        const [validation,setvalidation] = useState<IValidationform>({name:false,email:false,password:false,repeatpassword:false})
+        const [error,seterror] = useState<IValidationform>({name:false,email:false,password:false,repeatpassword:false})
+        const example = (e: React.FocusEvent<HTMLInputElement>) =>{
+            switch (e.target.name){
+                case 'name':
+                    setvalidation({...validation,name:true})
+                    break
+                case 'email':
+                    break
+                case 'password':
+                    break
+                case 'repeatpassword':
+                    break
+            }
+        }
+
+        useEffect(()=>{ //! Написать ф-цию проверки
+
+
+        },[validation])
+
     return (
         <div className='registration__wrapper'>
             <form className='body'>
                     {(data)?<h2>Регистрация</h2>:<h2>Вход</h2>}
                     {data&&<div className='login'>
-                            <Input value={user.name} type='text' placeholder='Введите имя' onChange={(e)=>setuser({...user,name:(e.target as HTMLInputElement).value})}/>
+                            {validation.name&&!error.name&&<div>Неверное имя</div>}
+                            <Input onBlur={example} name='name' value={user.name} type='text' placeholder='Введите имя' onChange={(e)=>setuser({...user,name:(e.target as HTMLInputElement).value})}/>
                     </div>}
                     <div className='login'>
-                    <Input type='email' value={user.email} onChange={(e)=>setuser({...user,email:(e.target as HTMLInputElement).value})}  placeholder='Введите почту'/>
+                    <Input onBlur={example} name='email' type='email' value={user.email} onChange={(e)=>setuser({...user,email:(e.target as HTMLInputElement).value})}  placeholder='Введите почту'/>
                     </div>
                     <div className='pass'>
-                            <Input type='password' value={user.password} onChange={(e)=>setuser({...user,password:(e.target as HTMLInputElement).value})}  placeholder='Введите пароль'/>
+                            <Input onBlur={example} name='password' type='password' value={user.password} onChange={(e)=>setuser({...user,password:(e.target as HTMLInputElement).value})}  placeholder='Введите пароль'/>
                     </div>
                     {data&&<div className='pass'>
-                            <Input type='password' placeholder='Повторите пароль'/>
+                            <Input onBlur={example} name='repeatpassword' type='password' placeholder='Повторите пароль'/>
                     </div>}
-                    {(data)?<button type='submit' onClick={SendAllData} className='enter'>Регистрация</button>:<button className='enter'>Войти</button>}
+                    {(data)?<button type='submit' onClick={SendAllData} disabled={true} className='enter'>Регистрация</button>:<button className='enter'>Войти</button>}
                     {(!data) ? <div className='remind'>
                             <div className='forgotpass'>Забыли пароль?</div>
                             <div onClick={() => setdata(!data)} className='registration'>Регистрация</div>
