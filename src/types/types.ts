@@ -1,3 +1,6 @@
-export interface IProps{
-
+export interface IUser{
+    id:number;
+    name:string;
+    email:string;
+    password:string;
 }
