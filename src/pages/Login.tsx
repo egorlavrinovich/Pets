@@ -3,79 +3,53 @@ import '../SCSS/style.scss'
 import {useState} from "react";
 import Input from "../components/UI/Input/Input";
 import {IUser,IValidationform} from "../types/types";
+import {UseChangeInput} from "../hooks/UseChangeInput";
+import {UseCheckInput} from '../hooks/UseCheckInput'
 const Login = React.memo(() => {
-        const [data,setdata] = useState<boolean>(false)
-        const [user,setuser] = useState<IUser>({name:'',email:'',id:Date.now(),password:''})
-        const [repeatpassword,setrepeatpassword] = useState<string>('')
-        const [reset,setrest] = useState<boolean>(true)
-        function SendAllData():IUser|null{
-               return user
-        }
-        const [validation,setvalidation] = useState<IValidationform>({name:false,email:false,password:false,repeatpassword:false})
-        const [error,seterror] = useState<IValidationform>({name:true,email:false,password:false,repeatpassword:false})
-        const example = (e: React.FocusEvent<HTMLInputElement>) =>{
-            switch (e.target.name){
-                case 'name':
-                    setvalidation({...validation,name:true})
-                    break
-                case 'email':
-                    setvalidation({...validation,email:true})
-                    break
-                case 'password':
-                    setvalidation({...validation,password:true})
-                    break
-                case 'repeatpassword':
-                    setvalidation({...validation,repeatpassword:true})
-                    break
-            }
-        }
+        const [loginorregistration,setloginorregistration] = useState<boolean>(false) // выбор нужной формы (логин или регистрация)
+        const [disabled,setdisabled] = useState<boolean>(true) // делаем кнопку регистрации disabled or not
+        const name = UseChangeInput() // контролируем инпут через хук
+        const login = UseChangeInput() // контролируем инпут через хук
+        const password = UseChangeInput() // контролируем инпут через хук
+        const repeatpassword = UseChangeInput() // контролируем инпут через хук
+        const nameFilter = UseCheckInput(name.str,'length',2) // делаем проверку на кол-во символов в имени
+        const emailChecker = UseCheckInput(login.str,'email') // делаем проверку на email
+        const passChecker = UseCheckInput(password.str,'pass') // делаем проверку на pass
+        const matchPasses = UseCheckInput(password.str,repeatpassword.str) // делаем проверку на совпадение паролей
+
         useEffect(()=>{
-            ((Object.values(error).filter(item=>!item).length)===4)?setrest(false):setrest(true)
-        },[error])
-        useEffect(()=>{
-            if(validation.name){
-                (user.name.length>10||user.name.length<=2)?seterror({...error,name:true}):seterror({...error,name:false})
-            }
-            if(validation.email){
-                const re = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-                (!re.test(String(user.email).toLowerCase()))?seterror({...error,email:true}):seterror({...error,email:false})
-            }
-            if(validation.password){
-                const beginWithoutDigit = /[A-Z]/g;
-                ( !beginWithoutDigit.test(user.password)&&user.password.length<6)?seterror({...error,password:true}):seterror({...error,password:false})
-            }
-            if(validation.repeatpassword){
-                (user.password!==repeatpassword)?seterror({...error,repeatpassword:true}):seterror({...error,repeatpassword:false})
-            }
-        },[validation])
+                if(!nameFilter.error&&!emailChecker.error&&!passChecker.error&&!matchPasses.error){
+                        setdisabled(false)
+                }
+        },[nameFilter.error,emailChecker.error,passChecker.error,matchPasses.error])
 
     return (
         <div className='registration__wrapper'>
             <form className='body'>
-                    {(data)?<h2>Регистрация</h2>:<h2>Вход</h2>}
-                    {data&&<div className='login'>
-                            {validation.name&&error.name&&<div>Неверное имя</div>}
-                            <Input onBlur={example} name='name' value={user.name} type='text' placeholder='Введите имя' onChange={(e)=>setuser({...user,name:(e.target as HTMLInputElement).value})}/>
+                    {(loginorregistration)?<h2>Регистрация</h2>:<h2>Вход</h2>}
+                    {loginorregistration&&<div className='login'>
+                            {name.blur&&nameFilter.error&&<div>Неверное имя</div>}
+                            <Input onBlur={name.OnBlur} name='name' value={name.str} type='text' placeholder='Введите имя' onChange={name.ChangeState}/>
                     </div>}
                     <div className='login'>
-                        {validation.email&&error.email&&<div>Неверная почта</div>}
-                    <Input onBlur={example} name='email' type='email' value={user.email} onChange={(e)=>setuser({...user,email:(e.target as HTMLInputElement).value})}  placeholder='Введите почту'/>
+                        {login.blur&&emailChecker.error&&<div>Неверная почта</div>}
+                    <Input onBlur={login.OnBlur} name='email' type='email' value={login.str} onChange={login.ChangeState}  placeholder='Введите почту'/>
                     </div>
                     <div className='pass'>
-                            {validation.password&&error.password&&<div>Слишком простой пароль</div>}
-                            <Input onBlur={example} name='password' type='password' value={user.password} onChange={(e)=>setuser({...user,password:(e.target as HTMLInputElement).value})}  placeholder='Введите пароль'/>
+                            {password.blur&&passChecker.error&&<div>Лёгкий пароль</div>}
+                            <Input onBlur={password.OnBlur} name='password' type='password' value={password.str} onChange={password.ChangeState}  placeholder='Введите пароль'/>
                     </div>
-                    {data&&<div className='pass'>
-                            {validation.repeatpassword&&error.repeatpassword&&<div>Пароли не совпадают</div>}
-                            <Input onBlur={example} onChange={(e)=>setrepeatpassword((e.target as HTMLInputElement).value)} name='repeatpassword' type='password' placeholder='Повторите пароль'/>
+                    {loginorregistration&&<div className='pass'>
+                            {repeatpassword.blur&&password.blur&&matchPasses.error&&<div>Пароли не совпадают</div>}
+                            <Input value={repeatpassword.str} onBlur={repeatpassword.OnBlur} onChange={repeatpassword.ChangeState} name='repeatpassword' type='password' placeholder='Повторите пароль'/>
                     </div>}
-                    {(data)?<button type='submit' onClick={SendAllData} disabled={reset} className='enter'>Регистрация</button>:<button className='enter'>Войти</button>}
-                    {(!data) ? <div className='remind'>
+                    {(loginorregistration)?<button type='submit' disabled={disabled} className='enter'>Регистрация</button>:<button className='enter'>Войти</button>}
+                    {(!loginorregistration) ? <div className='remind'>
                             <div className='forgotpass'>Забыли пароль?</div>
-                            <div onClick={() => setdata(!data)} className='registration'>Регистрация</div>
+                            <div onClick={() => setloginorregistration(!loginorregistration)} className='registration'>Регистрация</div>
                         </div> :
                         <div className='remind'>
-                            <div onClick={() => setdata(!data)} className='registration'>Уже есть аккаунт?</div>
+                            <div onClick={() => setloginorregistration(!loginorregistration)} className='registration'>Уже есть аккаунт?</div>
                         </div>
                     }
             </form>
