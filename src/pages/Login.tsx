@@ -1,5 +1,4 @@
 import React, {FC, FocusEventHandler, useEffect} from 'react';
-import '../SCSS/style.scss'
 import {useState} from "react";
 import Input from "../components/UI/Input/Input";
 import {IUser,IValidationform} from "../types/types";

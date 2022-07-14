@@ -6,6 +6,7 @@ import Admin from "./pages/Admin";
 import Login from "./pages/Login";
 import Basket from "./pages/Basket";
 import Product from "./pages/Product";
+import './SCSS/style.scss'
 function App() {
   return (
     <BrowserRouter>
