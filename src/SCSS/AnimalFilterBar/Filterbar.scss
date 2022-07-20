@@ -28,3 +28,12 @@
     color: black;
   }
 }
+@media (max-width: 480px) {
+  .cats,.dogs,.rats,.fish,.ferrets {
+    display: flex;
+    flex-direction: column;
+    font-size: normal;
+    line-height: normal;
+    align-items: center;
+  }
+}

@@ -1,14 +1,14 @@
 import React from 'react';
 // @ts-ignore
-import cat from '../../../Assets/ico/cat.ico'
+import cat from '../../../assets/ico/cat.ico'
 // @ts-ignore
-import dog from '../../../Assets/ico/dog.ico'
+import dog from '../../../assets/ico/dog.ico'
 // @ts-ignore
-import fish from '../../../Assets/ico/fish.ico'
+import fish from '../../../assets/ico/fish.ico'
 // @ts-ignore
-import bird from '../../../Assets/ico/bird.ico'
+import bird from '../../../assets/ico/bird.ico'
 // @ts-ignore
-import rat from '../../../Assets/ico/rat.ico'
+import rat from '../../../assets/ico/rat.ico'
 
 const FilterBar = () => {
     return (
