@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, FC, useEffect} from 'react';
 // @ts-ignore
 import cats from '../../../assets/ico/cat.ico'
 // @ts-ignore
@@ -10,9 +10,13 @@ import bird from '../../../assets/ico/bird.ico'
 // @ts-ignore
 import rats from '../../../assets/ico/rat.ico'
 import classNames from "classnames";
-const FilterBar = () => {
+import {ICategories} from "../../../types/types";
+import {useAppDispatch, useAppSelector} from "../../../hooks/Reduxhooks";
+import {addCategories, changeCategory} from "../../../Redux/CateggriesSlice";
+import {useDispatch} from "react-redux";
+const FilterBar:FC = () => {
     const [active,setactive] = useState('')
-    const Categories = [{
+    const Categories:ICategories[] = [{
         type:'cats',
         name:"Кошки",
         url:cats
@@ -33,13 +37,17 @@ const FilterBar = () => {
             type:'bird',
             name:"Птицы",
             url:bird
-        },
-
-    ]
+        }]
+    const dispatch=useDispatch() // Добавляем по дефолту категории животных
+    useEffect(()=>{
+        dispatch(addCategories(Categories))
+    },[])
+    useEffect(()=>{dispatch(changeCategory(active))},[active]) // меняем категорию животных
+    const categories = useAppSelector(state=>state.categories.categories)
     return (
         <div className='wrapper-filter-bar'>
             <div className='filter-bar'>
-                {Categories.map(item=><div onClick={()=>setactive(item.type)} className={classNames('cats',{'active':active==item.type})}><div className='name'>{item.name}</div><div className="svg"><img src={item.url}/></div></div>)}
+                {categories.map(item=><div onClick={()=>setactive(item.type)} className={classNames('cats',{'active':active===item.type})}><div className='name'>{item.name}</div><div className="svg"><img src={item.url} alt={item.name}/></div></div>)}
             </div>
         </div>
     );

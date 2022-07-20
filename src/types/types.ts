@@ -10,3 +10,8 @@ export interface IValidationform{
     password:boolean;
     repeatpassword:boolean;
 }
+export interface ICategories{
+    type:string,
+    name:string,
+    url:any
+}
