@@ -1,0 +1,30 @@
+.wrapper-filter-bar {
+  width: 100%;
+  justify-content: center;
+}
+
+.filter-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  line-height: 5vh;
+  font-size: large;
+  background-color: rgba(255, 140, 0, 0.83);
+}
+
+.cats,.dogs,.rats,.fish,.ferrets {
+  display: flex;
+  justify-content: center;
+  flex: 1 1 auto;
+  cursor: pointer;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  &:hover{
+    background-color: rgba(255, 38, 0, 0.26);
+    color: #fdfdfd;
+  }
+  svg{
+    height: 80%;
+    color: black;
+  }
+}
