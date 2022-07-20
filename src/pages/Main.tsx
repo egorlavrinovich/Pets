@@ -3,6 +3,7 @@ import Header from "../components/common/Header/header";
 import '../SCSS/style.scss'
 import WorkTime from "../components/common/WorkTime/WorkTime";
 import FilterBar from "../components/common/AnimalFilterBar/FilterBar";
+import Discount from "../components/common/Discount/Discount";
 
 
 const Main = () => {
@@ -12,6 +13,7 @@ const Main = () => {
                 <header className="header"><Header/><div className="adversting"><WorkTime/></div>
                 <div><FilterBar/></div>
                 </header>
+                <section><Discount/></section>
             </div>
         </div>
     );

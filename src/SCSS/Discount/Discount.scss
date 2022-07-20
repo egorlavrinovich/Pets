@@ -1,0 +1,44 @@
+.discount-wrapper {
+  display: flex;
+}
+
+.discount-block {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.left-but,.right-but {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3%;
+  height: 100%;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  color: black;
+  &:hover{
+    background-color: rgba(255, 169, 0, 0.4);
+
+  }
+  background-color: rgba(210, 158, 11, 0.12);
+}
+.left-but{
+  top:0;
+  left:0;
+}
+.right-but{
+  top:0;
+  right:0;
+}
+
+.top-image {
+  display: flex;
+  img{
+    width: 100%;
+  }
+}
+
+.discount-goods {
+}
