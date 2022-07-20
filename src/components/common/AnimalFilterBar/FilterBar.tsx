@@ -9,14 +9,20 @@ import fish from '../../../assets/ico/fish.ico'
 import bird from '../../../assets/ico/bird.ico'
 // @ts-ignore
 import rats from '../../../assets/ico/rat.ico'
+// @ts-ignore
+import discount from '../../../assets/ico/discont.ico'
 import classNames from "classnames";
 import {ICategories} from "../../../types/types";
 import {useAppDispatch, useAppSelector} from "../../../hooks/Reduxhooks";
 import {addCategories, changeCategory} from "../../../Redux/CateggriesSlice";
 import {useDispatch} from "react-redux";
 const FilterBar:FC = () => {
-    const [active,setactive] = useState('')
+    const [active,setactive] = useState('discount')
     const Categories:ICategories[] = [{
+        type:'discount',
+        name:"Акции",
+        url:discount
+    },{
         type:'cats',
         name:"Кошки",
         url:cats
@@ -47,7 +53,7 @@ const FilterBar:FC = () => {
     return (
         <div className='wrapper-filter-bar'>
             <div className='filter-bar'>
-                {categories.map(item=><div onClick={()=>setactive(item.type)} className={classNames('cats',{'active':active===item.type})}><div className='name'>{item.name}</div><div className="svg"><img src={item.url} alt={item.name}/></div></div>)}
+                {categories.map((item,index)=><div key={index} onClick={()=>setactive(item.type)} className={classNames(`${item.type}`,{'active':active===item.type})}><div className='name'>{item.name}</div><div className="svg"><img src={item.url} alt={item.name}/></div></div>)}
             </div>
         </div>
     );

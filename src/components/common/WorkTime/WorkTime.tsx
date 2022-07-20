@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {TelephoneFill, Clock, CartFill, CartX, Cart2} from "react-bootstrap-icons";
 import {Card} from "react-bootstrap";
 
-const Adversting = () => {
+const WorkTime = () => {
     const [CopyNumber,SetCopyNumber] = useState(false)
     if(CopyNumber){
         setTimeout(()=>{SetCopyNumber(false)},600)
@@ -17,4 +17,4 @@ const Adversting = () => {
     );
 };
 
-export default Adversting;
+export default WorkTime;

@@ -13,12 +13,13 @@
   background-color: rgba(255, 140, 0, 0.83);
 }
 
-.cats,.dogs,.rats,.fish,.bird {
+.cats,.dogs,.rats,.fish,.bird,.discount {
   display: flex;
   justify-content: center;
   flex: 1 1 auto;
   cursor: pointer;
   border-right: 1px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
   &:hover{
     background-color: rgba(255, 38, 0, 0.26);
     color: #fdfdfd;
@@ -33,10 +34,14 @@
   .cats,.dogs,.rats,.fish,.ferrets {
     display: flex;
     flex-direction: column;
-    font-size: normal;
+    font-size: medium;
     line-height: normal;
     align-items: center;
   }
+}
+.discount{
+  color:red;
+  font-size: large;
 }
 .active{
   display: flex;
