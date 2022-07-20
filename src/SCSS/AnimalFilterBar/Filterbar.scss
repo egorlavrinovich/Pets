@@ -13,7 +13,7 @@
   background-color: rgba(255, 140, 0, 0.83);
 }
 
-.cats,.dogs,.rats,.fish,.ferrets {
+.cats,.dogs,.rats,.fish,.bird {
   display: flex;
   justify-content: center;
   flex: 1 1 auto;
@@ -27,6 +27,7 @@
     height: 80%;
     color: black;
   }
+  transition: all 0.1s ease;
 }
 @media (max-width: 480px) {
   .cats,.dogs,.rats,.fish,.ferrets {
@@ -36,4 +37,11 @@
     line-height: normal;
     align-items: center;
   }
+}
+.active{
+  display: flex;
+  background-color: rgba(255, 38, 0, 0.26);
+  flex: 1 1 auto;
+  justify-content: center;
+  color: white;
 }
