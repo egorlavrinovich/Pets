@@ -7,27 +7,25 @@ import {clearInterval} from "timers";
 const Discount = React.memo(() => {
     const [activeblock,setactiveblock] = useState(false)
     const [activeimage,setactiveimage] = useState(0)
-    const ff = useRef(0)
-    // @ts-ignore
-    ff.current = activeimage
+    const Timeout:any = useRef()
     const Available = useAppSelector((state)=>state.categories.choosedcategory)
     useEffect(()=>{if(Available==='discount')setactiveblock(true)
     else setactiveblock(false)},[Available])
     function SpinBlock(perem:string){
         switch (perem){
-            case 'right':setactiveimage(()=>ff.current+1);clearTimeout(Timeout.current); break
-            case 'left':setactiveimage(()=>ff.current-1);clearTimeout(Timeout.current);break
+            case 'right':setactiveimage((x)=>x+1);clearTimeout(Timeout.current); break
+            case 'left':setactiveimage((x)=>x-1);clearTimeout(Timeout.current);break
         }
     }
     // @ts-ignore
-    const Timeout = useRef()
     useEffect(()=>{
         if(activeimage>6) setactiveimage(0)
         if(activeimage<0) setactiveimage(6)
-        // @ts-ignore
-        Timeout.current=setTimeout(()=>{setactiveimage(()=>ff.current+1)},2000)
+        Timeout.current=setTimeout(()=>{setactiveimage((x)=>x+1)},2000)
         console.log(Timeout.current)
     },[activeimage])
+
+
     return (
         <div className='discount-wrapper'>
             <div className='discount-block'>
