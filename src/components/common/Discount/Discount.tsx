@@ -18,7 +18,10 @@ const Discount = React.memo(() => {
             <div className='top-image'><img src={images[activeimage]}/></div>
             <div onClick={() => SpinBlock('right')} className='right-but'><ArrowRight/></div>
         </div>
-        <div className='discount-goods'></div>
+        <div className='discount-goods'>
+            <h4>Акционные товары</h4>
+
+        </div>
     </div>
 }</>
     );
