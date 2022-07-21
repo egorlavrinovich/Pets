@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
   position: relative;
+  width: 100%;
 }
 
 .left-but,.right-but {
@@ -35,6 +36,8 @@
 
 .top-image {
   display: flex;
+  width: 100%;
+
   img{
     width: 100%;
   }
