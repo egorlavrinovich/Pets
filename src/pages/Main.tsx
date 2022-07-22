@@ -4,16 +4,27 @@ import '../SCSS/style.scss'
 import WorkTime from "../components/common/WorkTime/WorkTime";
 import FilterBar from "../components/common/AnimalFilterBar/FilterBar";
 import Discount from "../components/common/Discount/Discount";
-
+import FilterSection from "../components/common/FilterSection/FilterSection";
+import Cart from '../components/common/Cart/Cart'
 
 const Main = () => {
     return (
         <div className='main-wrapper'>
             <div className="main-container">
                 <header className="header"><Header/><div className="adversting"><WorkTime/></div>
-                <div><FilterBar/></div>
+                <nav><FilterBar/></nav>
                 </header>
-                <section><Discount/></section>
+                <main>
+                    <section className='discount-section'><Discount/></section>
+                    <section className='wrapper-section-page'>
+                        <div className='filter-section'>
+                            <FilterSection/>
+                        </div>
+                        <div className='page-section'>
+                            <Cart/>
+                        </div>
+                    </section>
+                </main>
             </div>
         </div>
     );
