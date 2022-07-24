@@ -5,31 +5,32 @@ import Slider from 'rc-slider'
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
 const InputRange = () => {
-    const [value,setvalue] = useState('170')
-    const [state,setstate] = useState<string>('0')
-    const [range,setrange] = useState([0,100])
-    const onHandleChange = (e:React.ChangeEvent<HTMLInputElement>) => setvalue(e.target.value);
-    const onChangeRange = (e:any)=> setrange(e)
+    const [state,setstate] = useState<[]>([])
+    const [range,setrange] = useState([0,100]) // Разобраться с ф-цие onBlur чтобы не было много перерендеров в стейт из за инпутаРа
+    const [active,setactiv] = useState<boolean>(false)
+    function Blur(act:boolean){
+        setactiv(act)
+    }
+    console.log(active)
     return (
         <div className='input-range-wrapper'>
             <Range
                 marks={{
-                    100: `$ 100`,
-                    500: `$ 500`
+                    0: `0 руб`,
+                    500: `500 руб`
                 }}
-                min={100}
+                min={0}
                 max={500}
-                defaultValue={[200, 300]}
+                defaultValue={[0, 500]}
                 // @ts-ignore
-
-                tipFormatter={value => `$ ${value}`}
+                tipFormatter={value => `${value} руб`}
                 tipProps={{
                     placement: "top",
-                    visible: true
+                    visible: true,
                 }}
+                onChange={(e:[])=>setstate(e)}
+                onBlur={()=>setactiv(!active)}
             />
-            <div>{`Цена до: ${value} руб`}</div>
-            <input value={value} type='range' min={0} max={170} onChange={(e)=>onHandleChange(e)} />
         </div>
     );
 };

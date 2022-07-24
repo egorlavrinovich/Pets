@@ -16,7 +16,6 @@ export function UseAdv(){
                 if(activeimage<0) setactiveimage(CountImages)
                 Timeout.current=setTimeout(()=>{setactiveimage((x:number)=>x+1)},Delayms)
             }
-            console.log(turn)
         },[activeimage,CountImages])
     }
     return {activeimage,SpinBlock,Times}
