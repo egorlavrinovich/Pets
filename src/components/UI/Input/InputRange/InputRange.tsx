@@ -26,6 +26,7 @@ const InputRange = React.memo(() => {
             {/*// @ts-ignore*/}
             <Input type='text' value={example[1]} onChange={(event)=>setexample([...example.splice(2,1),+event.target.value,])} placeholder=''/> //дописать функционал
             <Range
+                value={state}
                 marks={{
                     0: `0 руб`,
                     500: `500 руб`
