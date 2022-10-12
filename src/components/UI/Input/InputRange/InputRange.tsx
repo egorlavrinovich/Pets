@@ -4,52 +4,55 @@ import "rc-slider/assets/index.css";
 import Slider from "rc-slider";
 import { useDispatch } from "react-redux";
 import { addRange } from "../../../../Redux/FilterSlice";
-import { UseChangeInput } from "../../../../hooks/UseChangeInput";
 import Input from "../Input";
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
 const InputRange = React.memo(() => {
-  const [state, setstate] = useState<any>([0, 500]); // выбранная цена пользователем
-  const [range, setrange] = useState([0, 500]); // Диапазон цен
-  const [active, setactiv] = useState<boolean>(false); // маркер наблюдение за ценой пользователя
-  const [rangePriceInput, setRangePriceInput] = useState<any>([0, 100]); // фильтр цен
+  const [active, setactiv] = useState<boolean>(false); // цена, выбранная с помощью пользователя
+  const [rangePriceInput, setRangePriceInput] = useState<any>([0, 500]); // фильтр цен
   const dispatch = useDispatch();
   useEffect(() => {
-    // @ts-ignore
-    dispatch(addRange(state)); // добавляем фильтр для цены
+    dispatch(addRange(rangePriceInput)); // добавляем фильтр для цены
   }, [active]);
   console.log(rangePriceInput);
   return (
-    <div className="input-range-wrapper">
-      <Input
-        type="text"
-        value={rangePriceInput[0]}
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setRangePriceInput([+e.target.value, rangePriceInput[1]])
-        }
-        placeholder=""
-      />
-      <Input
-        type="text"
-        value={rangePriceInput[1]}
-        onChange={(e: ChangeEvent<HTMLInputElement>) =>
-          setRangePriceInput([rangePriceInput[0], +e.target.value])
-        }
-        placeholder=""
-      />{" "}
-      <Range
-        value={state}
-        marks={{
-          0: `0 руб`,
-          500: `500 руб`,
-        }}
-        min={range[0]}
-        max={range[1]}
-        defaultValue={[0, 500]}
-        onChange={(e: []) => setstate(e)}
-        onBlur={() => setactiv(!active)}
-      />
-    </div>
+    <>
+      <h4>Фильтр по цене</h4>
+      <div className="input-range-wrapper">
+        <div className="filter-price-input">
+          <Input
+            type="text"
+            value={rangePriceInput[0]}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setRangePriceInput([+e.target.value, rangePriceInput[1]])
+            }
+            placeholder=""
+          />
+          <h3>–</h3>
+          <Input
+            type="text"
+            value={rangePriceInput[1]}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setRangePriceInput([rangePriceInput[0], +e.target.value])
+            }
+            placeholder=""
+          />{" "}
+        </div>
+        <div className="filter-price-range">
+          <Range
+            value={rangePriceInput}
+            marks={{
+              0: `0`,
+              500: `500`,
+            }}
+            min={0}
+            max={500}
+            onChange={(e: []) => setRangePriceInput(e)}
+            onBlur={() => setactiv(!active)}
+          />
+        </div>
+      </div>
+    </>
   );
 });
 
