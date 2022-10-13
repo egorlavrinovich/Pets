@@ -22,6 +22,9 @@ const FilterSection = () => {
       <InputRange />
       <InputCategories categories={categoriesOfProduct} />
       <InputCategories categories={categoriesOfProduct} />
+      <InputCategories categories={categoriesOfProduct} />
+      <InputCategories categories={categoriesOfProduct} />
+      <InputCategories categories={categoriesOfProduct} />
     </div>
   );
 };
