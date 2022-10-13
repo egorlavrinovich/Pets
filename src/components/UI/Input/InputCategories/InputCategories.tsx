@@ -2,24 +2,22 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import Input from "../Input";
 import { useDispatch } from "react-redux";
 import { addfilterCategories } from "../../../../Redux/FilterSlice";
-const InputCategories = () => {
-  const categories = [
-    "Orijen",
-    "Hill's",
-    "Optimeal",
-    "Acana",
-    "Royal Canin",
-    "Brit Premium",
-    "KiteKat",
-    "Felix",
-    "Whiskas",
-  ];
+
+interface IInputCategories {
+  categories: {
+    filterName: string;
+    filterCategory: string[];
+  };
+}
+
+const InputCategories = (props: IInputCategories) => {
   const dispatch = useDispatch();
 
   const [filterCategory, setFilterCategory] = useState<any>([]); // Выбранные категории пользователем
 
   function pushCategories(e: ChangeEvent<HTMLInputElement>) {
     // Ф-ция для удаления дубликатов в массиве
+    //@ts-ignore
     if (filterCategory.includes(e.target.value)) {
       const filteredArr = filterCategory.filter(
         (item: string) => item !== e.target.value
@@ -31,18 +29,21 @@ const InputCategories = () => {
 
   return (
     <div className="categories-goods">
-      <h5>Производители товара</h5>
-      {categories.map((item) => {
+      <h5>{props.categories.filterName}</h5>
+      {props.categories.filterCategory.map((item) => {
         return (
           <div className="categories-food" key={item}>
-            <Input
-              value={item}
-              type="checkbox"
-              id="scales"
-              name="scales"
-              onChange={pushCategories}
-            />
-            <label htmlFor="scales">{item}</label>
+            <label className="categories-food-label">
+              <Input
+                value={item}
+                type="checkbox"
+                id="categories"
+                name="categories"
+                onChange={pushCategories}
+              />
+              <div className="stlchek"></div>
+              {item}
+            </label>
           </div>
         );
       })}

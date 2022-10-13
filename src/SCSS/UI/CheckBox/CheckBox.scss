@@ -1,0 +1,43 @@
+input[type="checkbox"] {
+    display: none;
+}
+.categories-food-label {
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+}
+.stlchek {
+    display: inline-block;
+    border: 2px solid #b2b1b1;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    vertical-align: middle;
+    box-sizing: border-box;
+    margin-right: 8px;
+    margin-bottom: 3px;
+}
+
+/* = делаем скрытый квадратик в нашем div */
+.stlchek:before {
+    content: "";
+    background: gold;
+    width: 8px;
+    height: 8px;
+    opacity: 0;
+    transition: 0.3s;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+}
+input:checked + .stlchek:before {
+    opacity: 1;
+}
+.categories-goods {
+    width: 80%;
+    margin-top: 10%;
+    margin-left: 30%;
+}
+.categories-food {
+    width: 40%;
+}
