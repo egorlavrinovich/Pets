@@ -5,6 +5,7 @@ import Slider from "rc-slider";
 import { useDispatch } from "react-redux";
 import { addRange } from "../../../../Redux/FilterSlice";
 import Input from "../Input";
+
 const { createSliderWithTooltip } = Slider;
 const Range = createSliderWithTooltip(Slider.Range);
 const InputRange = React.memo(() => {
@@ -14,7 +15,6 @@ const InputRange = React.memo(() => {
   useEffect(() => {
     dispatch(addRange(rangePriceInput)); // добавляем фильтр для цены
   }, [active]);
-  console.log(rangePriceInput);
   return (
     <>
       <h4>Фильтр по цене</h4>
