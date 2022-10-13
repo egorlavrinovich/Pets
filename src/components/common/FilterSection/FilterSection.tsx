@@ -4,6 +4,7 @@ import InputRange from "../../UI/Input/InputRange/InputRange";
 
 const FilterSection = () => {
   const categoriesOfProduct = {
+    typeFilter: "foodMaker",
     filterName: "Производитель",
     filterCategory: [
       "Orijen",
@@ -17,14 +18,16 @@ const FilterSection = () => {
       "Whiskas",
     ],
   };
+  const popularityOfProduct = {
+    typeFilter: "Popular",
+    filterName: "Популярное",
+    filterCategory: ["Felix", "Whiskas"],
+  };
   return (
     <div className="filter-wrapper-brands">
       <InputRange />
       <InputCategories categories={categoriesOfProduct} />
-      <InputCategories categories={categoriesOfProduct} />
-      <InputCategories categories={categoriesOfProduct} />
-      <InputCategories categories={categoriesOfProduct} />
-      <InputCategories categories={categoriesOfProduct} />
+      <InputCategories categories={popularityOfProduct} />
     </div>
   );
 };

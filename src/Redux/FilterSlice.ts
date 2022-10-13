@@ -3,7 +3,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 const initialState ={
     range:[0,500],
     filterCategories:[]
-}
+} as any
 
 const FilterSlice = createSlice({
     name:'filter',
@@ -12,8 +12,16 @@ const FilterSlice = createSlice({
         addRange(state,action:PayloadAction<[]>){
             state.range=[...action.payload]
         },
-        addfilterCategories(state,action:PayloadAction<[]>){
-            state.filterCategories=[...action.payload]
+        addfilterCategories(state,action:PayloadAction<any[]>){
+           state.filterCategories.map((item:any)=>{
+            if (item.typeFilter === action.payload[0]){
+                item={...item,choosedCategory:action.payload[1]}
+            } 
+           })
+           state.filterCategories=[...state.filterCategories,{
+                    typeFilter:action.payload[0],
+                    choosedCategory:action.payload[1]
+                }]
         }
     }
 })

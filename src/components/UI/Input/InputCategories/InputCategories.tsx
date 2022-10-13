@@ -5,6 +5,7 @@ import { addfilterCategories } from "../../../../Redux/FilterSlice";
 
 interface IInputCategories {
   categories: {
+    typeFilter: string;
     filterName: string;
     filterCategory: string[];
   };
@@ -24,7 +25,9 @@ const InputCategories = (props: IInputCategories) => {
       );
       setFilterCategory(filteredArr);
     } else setFilterCategory([...filterCategory, e.target.value]);
-    dispatch(addfilterCategories(filterCategory));
+    dispatch(
+      addfilterCategories([props.categories.typeFilter, filterCategory])
+    );
   }
 
   return (
