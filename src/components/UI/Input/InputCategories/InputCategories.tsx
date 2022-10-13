@@ -14,7 +14,10 @@ const InputCategories = () => {
     "Felix",
     "Whiskas",
   ];
+  const dispatch = useDispatch();
+
   const [filterCategory, setFilterCategory] = useState<any>([]); // Выбранные категории пользователем
+
   function pushCategories(e: ChangeEvent<HTMLInputElement>) {
     // Ф-ция для удаления дубликатов в массиве
     if (filterCategory.includes(e.target.value)) {
@@ -23,11 +26,8 @@ const InputCategories = () => {
       );
       setFilterCategory(filteredArr);
     } else setFilterCategory([...filterCategory, e.target.value]);
-  }
-  const dispatch = useDispatch();
-  useEffect(() => {
     dispatch(addfilterCategories(filterCategory));
-  }, [filterCategory]);
+  }
 
   return (
     <div className="categories-goods">
