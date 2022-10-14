@@ -12,16 +12,23 @@ const FilterSlice = createSlice({
         addRange(state,action:PayloadAction<[]>){
             state.range=[...action.payload]
         },
-        addfilterCategories(state,action:PayloadAction<any[]>){
-           state.filterCategories.map((item:any)=>{
-            if (item.typeFilter === action.payload[0]){
-                item={...item,choosedCategory:action.payload[1]}
-            } 
-           })
-           state.filterCategories=[...state.filterCategories,{
-                    typeFilter:action.payload[0],
-                    choosedCategory:action.payload[1]
-                }]
+        addfilterCategories(state,action:PayloadAction<any[]>){ // Логика сортировки критериев для поиска по группам
+            if(!state.filterCategories.find((item:any)=>item.typeFilter===action.payload[0])){
+                state.filterCategories=[...state.filterCategories,{typeFilter:action.payload[0],choosedCategory:[action.payload[1]]}]
+            }
+            else{
+               state.filterCategories = [...state.filterCategories.map((item:any)=>{
+                if(item.typeFilter===action.payload[0]){
+                    if(item.choosedCategory.includes(action.payload[1])){
+                        return {...item,choosedCategory:item.choosedCategory.filter((item:any)=>item!==action.payload[1])}
+                    }
+                    else{
+                        return {...item,choosedCategory:[...item.choosedCategory,action.payload[1]]}
+                    }
+                }
+                return item
+               })] 
+            }
         }
     }
 })

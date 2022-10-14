@@ -14,19 +14,19 @@ interface IInputCategories {
 const InputCategories = (props: IInputCategories) => {
   const dispatch = useDispatch();
 
-  const [filterCategory, setFilterCategory] = useState<any>([]); // Выбранные категории пользователем
+  //   const [filterCategory, setFilterCategory] = useState<any>([]); // Выбранные категории пользователем
 
   function pushCategories(e: ChangeEvent<HTMLInputElement>) {
     // Ф-ция для удаления дубликатов в массиве
     //@ts-ignore
-    if (filterCategory.includes(e.target.value)) {
-      const filteredArr = filterCategory.filter(
-        (item: string) => item !== e.target.value
-      );
-      setFilterCategory(filteredArr);
-    } else setFilterCategory([...filterCategory, e.target.value]);
+    // if (filterCategory.includes(e.target.value)) {
+    //   const filteredArr = filterCategory.filter(
+    //     (item: string) => item !== e.target.value
+    //   );
+    //   setFilterCategory(filteredArr);
+    // } else setFilterCategory([...filterCategory, e.target.value]);
     dispatch(
-      addfilterCategories([props.categories.typeFilter, filterCategory])
+      addfilterCategories([props.categories.typeFilter, e.target.value])
     );
   }
 
