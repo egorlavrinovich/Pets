@@ -17,8 +17,8 @@ const InputRange = React.memo(() => {
   }, [active]);
   return (
     <>
-      <h4>Фильтр по цене</h4>
       <div className="input-range-wrapper">
+        <h4>Фильтр по цене</h4>
         <div className="filter-price-input">
           <Input
             type="text"

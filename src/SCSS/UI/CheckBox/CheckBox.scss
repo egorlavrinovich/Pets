@@ -2,15 +2,15 @@ input[type="checkbox"] {
     display: none;
 }
 .categories-food-label {
-    font-size: 16px;
+    font-size: x-large;
     font-weight: 400;
     cursor: pointer;
 }
 .stlchek {
     display: inline-block;
     border: 2px solid #b2b1b1;
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     position: relative;
     vertical-align: middle;
     box-sizing: border-box;
@@ -22,8 +22,8 @@ input[type="checkbox"] {
 .stlchek:before {
     content: "";
     background: gold;
-    width: 8px;
-    height: 8px;
+    width: 12px;
+    height: 12px;
     opacity: 0;
     transition: 0.3s;
     position: absolute;
@@ -34,9 +34,10 @@ input:checked + .stlchek:before {
     opacity: 1;
 }
 .categories-goods {
-    width: 80%;
-    margin-top: 10%;
-    margin-left: 30%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .categories-food {
     width: 40%;

@@ -11,7 +11,8 @@
   width: 100%;
 }
 
-.left-but,.right-but {
+.left-but,
+.right-but {
   position: absolute;
   display: flex;
   align-items: center;
@@ -21,30 +22,39 @@
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   color: black;
-  &:hover{
+  &:hover {
     background-color: rgba(255, 169, 0, 0.4);
-
   }
   background-color: rgba(210, 158, 11, 0.12);
 }
-.left-but{
-  top:0;
-  left:0;
+.left-but {
+  top: 0;
+  left: 0;
 }
-.right-but{
-  top:0;
-  right:0;
+.right-but {
+  top: 0;
+  right: 0;
 }
 
 .top-image {
   display: flex;
   width: 100%;
-  img{
+  img {
     display: inline-block;
     width: 100%;
   }
 }
 
-
 .discount-goods {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4vh;
+  color: red;
+  background-color: rgba(255, 255, 255, 0.548);
+  width: 100%;
+  svg {
+    height: 85%; // добавить SVG
+    fill: red;
+  }
 }

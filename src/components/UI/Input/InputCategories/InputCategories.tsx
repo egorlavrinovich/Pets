@@ -14,17 +14,7 @@ interface IInputCategories {
 const InputCategories = (props: IInputCategories) => {
   const dispatch = useDispatch();
 
-  //   const [filterCategory, setFilterCategory] = useState<any>([]); // Выбранные категории пользователем
-
   function pushCategories(e: ChangeEvent<HTMLInputElement>) {
-    // Ф-ция для удаления дубликатов в массиве
-    //@ts-ignore
-    // if (filterCategory.includes(e.target.value)) {
-    //   const filteredArr = filterCategory.filter(
-    //     (item: string) => item !== e.target.value
-    //   );
-    //   setFilterCategory(filteredArr);
-    // } else setFilterCategory([...filterCategory, e.target.value]);
     dispatch(
       addfilterCategories([props.categories.typeFilter, e.target.value])
     );
@@ -32,7 +22,7 @@ const InputCategories = (props: IInputCategories) => {
 
   return (
     <div className="categories-goods">
-      <h5>{props.categories.filterName}</h5>
+      <h4>{props.categories.filterName}</h4>
       {props.categories.filterCategory.map((item) => {
         return (
           <div className="categories-food" key={item}>
