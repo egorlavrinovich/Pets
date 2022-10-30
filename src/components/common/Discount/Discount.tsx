@@ -4,7 +4,6 @@ import { useAppSelector } from "../../../hooks/Reduxhooks";
 import images from "./Allimports";
 import { ArrowLeft, ArrowRight } from "react-bootstrap-icons";
 import { UseAdv } from "../../../hooks/UseAdv";
-import Svg from "../../UI/Svg/Svg";
 const Discount = React.memo(() => {
   const [activeblock, setactiveblock] = useState(true);
   const Available = useAppSelector((state) => state.categories.choosedcategory);
@@ -23,7 +22,7 @@ const Discount = React.memo(() => {
               <ArrowLeft />
             </div>
             <div className="top-image">
-              <img src={images[activeimage]} />
+              <img src={images[activeimage]} alt="discountImage" />
             </div>
             <div onClick={() => SpinBlock("right")} className="right-but">
               <ArrowRight />

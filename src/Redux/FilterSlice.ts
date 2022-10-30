@@ -36,3 +36,4 @@ const FilterSlice = createSlice({
 export const {addRange,addfilterCategories} = FilterSlice.actions
 
 export default FilterSlice.reducer
+

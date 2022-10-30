@@ -14,4 +14,6 @@
     // @ts-ignore
     import eight from '../../../assets/img/discount_8.jpg'
 
-  export default [second,third,four,five,six,seven,eight]
+  const imagesDiscpunt = [second,third,four,five,six,seven,eight]
+
+  export default imagesDiscpunt
