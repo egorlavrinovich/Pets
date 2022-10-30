@@ -5,3 +5,10 @@
   align-items: center;
   gap: 3rem;
 }
+@media screen and (max-width: 720px) {
+  .filter-wrapper-brands {
+    position: absolute;
+    background-color: white;
+    width: 70%;
+  }
+}

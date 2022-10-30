@@ -1,0 +1,57 @@
+.anymal-filter-block {
+    display: flex;
+    width: 100%;
+    min-height: 320px;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.647);
+    justify-content: center;
+}
+.filter-block-items {
+    display: flex;
+    gap: 5%;
+    justify-content: space-around;
+    flex: 0 1 auto;
+    min-height: 100px;
+    flex-wrap: wrap;
+    transition: 1s;
+    :hover {
+        cursor: pointer;
+        transform: scale(1.05);
+    }
+}
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 160px;
+}
+.filter-item-image {
+    max-width: 160px;
+    max-height: 160px;
+    pointer-events: none;
+    img {
+        background-size: cover;
+    }
+}
+.filter-item-name {
+    pointer-events: none;
+
+    display: flex;
+    justify-content: center;
+}
+.filterTitle {
+    display: flex;
+    justify-content: center;
+}
+@media screen and (max-width: 580px) {
+    .filter-item {
+        width: 100px;
+        height: 160px;
+    }
+    .filter-item-image {
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

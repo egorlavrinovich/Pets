@@ -42,3 +42,10 @@ input:checked + .stlchek:before {
 .categories-food {
     width: 40%;
 }
+@media screen and (max-width: 1000px) {
+    .categories-food-label {
+        font-size: medium;
+        font-weight: 400;
+        cursor: pointer;
+    }
+}

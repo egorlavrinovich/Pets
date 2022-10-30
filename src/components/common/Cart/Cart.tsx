@@ -1,11 +1,12 @@
-import React from 'react';
+import React from "react";
+import AnimalTypeFilter from "../AnimalTypeFilter/AnimalTypeFilter";
 
 const Cart = () => {
-    return (
-        <div>
-            Карточка товара
-        </div>
-    );
+  return (
+    <div className="cart">
+      <AnimalTypeFilter />
+    </div>
+  );
 };
 
 export default Cart;
