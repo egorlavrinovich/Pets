@@ -1,17 +1,13 @@
 import React from "react";
 
-const AnymalItemFilter = ({ filterItems }: any) => {
+const AnymalItemFilter = (props: any) => {
   return (
-    <>
-      {filterItems.map((item: any) => (
-        <div>
-          <div>
-            <img src={item?.url} alt="filterImage" />
-          </div>
-          <div>{item?.filterName}</div>
-        </div>
-      ))}
-    </>
+    <div className="filter-item" onClick={() => props.setactive(!props.active)}>
+      <div className="filter-item-image">
+        <img src={props.categories.url} alt="filterImage" />
+      </div>
+      <div className="filter-item-name">{props.categories.filterName}</div>
+    </div>
   );
 };
 
