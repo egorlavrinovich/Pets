@@ -39,9 +39,11 @@
 .top-image {
   display: flex;
   width: 100%;
+  max-height: 30vh;
   img {
     display: inline-block;
     width: 100%;
+    background-size: cover;
   }
 }
 
@@ -56,5 +58,18 @@
   svg {
     height: 85%; // добавить SVG
     fill: red;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .top-image {
+    display: flex;
+    width: 100%;
+    min-height: 15vh;
+    img {
+      display: inline-block;
+      width: 100%;
+      background-size: cover;
+    }
   }
 }
