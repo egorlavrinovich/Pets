@@ -1,0 +1,9 @@
+.arrow-back {
+    height: 6vh;
+    width: 6vw;
+    svg {
+        pointer-events: none;
+        height: 100%;
+        width: 100%;
+    }
+}

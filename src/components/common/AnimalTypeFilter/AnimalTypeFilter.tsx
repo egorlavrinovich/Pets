@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import Svg from "../../UI/Svg/Svg";
 import AnymalItemFilter from "./AnymalItemFilter";
 interface IAnymalFilter {
   // Разобраться с интерфейсом
@@ -47,13 +48,14 @@ const AnimalTypeFilter = (filterCategories: any) => {
               />
             )}
             <>
+              {!active && (
+                <div onClick={() => setactive(!active)} className="arrow-back">
+                  <Svg type="arrowBack" />
+                </div>
+              )}
               {!active &&
                 item.dependsCategories.map((items: any) => (
-                  <AnymalItemFilter
-                    active={active}
-                    setactive={setactive}
-                    categories={items}
-                  />
+                  <AnymalItemFilter active={active} categories={items} />
                 ))}
             </>
           </>
