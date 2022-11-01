@@ -5,7 +5,11 @@ const AnymalItemFilter = (props: any) => {
     <div
       className="filter-item"
       key={props.categories.url}
-      onClick={() => props.setactive(!props.active)}
+      onClick={() => {
+        if (props.setactive) props.setactive(!props.active);
+        if (props.setChoosedSlaveCategory)
+          props.setChoosedSlaveCategory(props.categories.slaveCategory);
+      }}
     >
       <div className="filter-item-image">
         <img src={props.categories.url} alt="filterImage" />
