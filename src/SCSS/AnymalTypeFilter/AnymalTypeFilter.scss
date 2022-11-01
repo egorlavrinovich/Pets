@@ -4,11 +4,12 @@
     min-height: 320px;
     flex-direction: column;
     background-color: white;
-    justify-content: center;
+    padding-top: 3vh;
 }
 .filter-block-items {
+    position: relative;
     display: flex;
-    gap: 5%;
+    gap: 2%;
     justify-content: flex-start;
     flex: 0 1 auto;
     min-height: 100px;
@@ -43,6 +44,13 @@
 .filterTitle {
     display: flex;
     justify-content: center;
+}
+.name-category {
+    position: absolute;
+    top: -3vh;
+    left: 40%;
+    font-size: x-large;
+    font-weight: 500;
 }
 @media screen and (max-width: 580px) {
     .filter-item {

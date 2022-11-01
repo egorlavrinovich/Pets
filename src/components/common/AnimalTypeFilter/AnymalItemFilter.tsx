@@ -2,7 +2,11 @@ import React from "react";
 
 const AnymalItemFilter = (props: any) => {
   return (
-    <div className="filter-item" onClick={() => props.setactive(!props.active)}>
+    <div
+      className="filter-item"
+      key={props.categories.url}
+      onClick={() => props.setactive(!props.active)}
+    >
       <div className="filter-item-image">
         <img src={props.categories.url} alt="filterImage" />
       </div>
