@@ -2,7 +2,8 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
 const initialState ={
     range:[0,500],
-    filterCategories:[]
+    filterCategories:[],
+    foodCategories:[]
 } as any
 
 const FilterSlice = createSlice({
@@ -29,11 +30,15 @@ const FilterSlice = createSlice({
                 return item
                })] 
             }
+        },
+        addFoodCategories(state,action:PayloadAction<any[]>){
+            if (state.foodCategories.length>1) state.foodCategories = action.payload
+            else state.foodCategories = [...action.payload]
         }
     }
 })
 
-export const {addRange,addfilterCategories} = FilterSlice.actions
+export const {addRange,addfilterCategories,addFoodCategories} = FilterSlice.actions
 
 export default FilterSlice.reducer
 

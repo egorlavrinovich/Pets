@@ -1,7 +1,9 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useAppDispatch } from "../../../hooks/Reduxhooks";
 import Svg from "../../UI/Svg/Svg";
 import AnymalItemFilter from "./AnymalItemFilter";
+import { addFoodCategories } from "../../../Redux/FilterSlice";
 interface IAnymalFilter {
   // Разобраться с интерфейсом
   categoriesFilter: any[];
@@ -10,13 +12,14 @@ interface IAnymalFilter {
 const AnimalTypeFilter = (filterCategories: any) => {
   //Разобраться с пропсами
   const [active, setactive] = useState<boolean>(true);
-  const [choosedGeneralCategory, setChoosedGeneralCategory] =
+  const [choosedGeneralCategoryId, setChoosedGeneralCategoryId] =
     useState<number>(0); // Выбираем категорию фильтра
-  const [choosedSlaveCategory, setChoosedSlaveCategory] = useState<string>(""); // Выбираем подкатегорию фильра
+  const [choosedSlaveCategory, setChoosedSlaveCategory] = useState<string>(""); // Выбираем подкатегорию фильтра
   const filterCatsCategories = [
     {
       url: "https://www.zootovar-spb.ru//images/10/58/105823.jpg",
       filterName: "Сухие корма",
+      animalCategory: "cats",
       generalNameCategory: "dryFood",
       dependsCategories: [
         {
@@ -49,6 +52,7 @@ const AnimalTypeFilter = (filterCategories: any) => {
     {
       url: "https://www.zootovar-spb.ru//images/10/64/106414.jpg",
       filterName: "Консервы",
+      animalCategory: "cats",
       generalNameCategory: "cannedFood",
       dependsCategories: [
         {
@@ -74,32 +78,47 @@ const AnimalTypeFilter = (filterCategories: any) => {
       ],
     },
   ];
+
+  const dispatch = useAppDispatch();
+
   function inditificateCategory(url: string) {
-    setChoosedGeneralCategory(
-      filterCatsCategories.findIndex((item) => item.url === url)
+    const choosedCategoryId = filterCatsCategories.findIndex(
+      (item) => item.url === url
     );
+    setChoosedGeneralCategoryId(choosedCategoryId);
   }
+  useEffect(() => {
+    dispatch(
+      addFoodCategories([
+        {
+          animalCategory:
+            filterCatsCategories[choosedGeneralCategoryId].animalCategory,
+          generalNameCategory:
+            filterCatsCategories[choosedGeneralCategoryId].generalNameCategory,
+          slaveCategory: choosedSlaveCategory,
+        },
+      ])
+    );
+  }, [choosedSlaveCategory]); // Добавление критерий для фильтра еды
   return (
-    <div className="anymal-filter-block">
+    <div className="anymal-filter-block" key={Date.now()}>
       <div className="filter-block-items">
         {filterCatsCategories.map((item: any) => (
-          <>
-            <div onClick={() => inditificateCategory(item.url)}>
-              {active && (
-                <AnymalItemFilter
-                  active={active}
-                  setactive={setactive}
-                  categories={item}
-                />
-              )}
-            </div>
-          </>
+          <div key={item.url} onClick={() => inditificateCategory(item.url)}>
+            {active && (
+              <AnymalItemFilter
+                active={active}
+                setactive={setactive}
+                categories={item}
+              />
+            )}
+          </div>
         ))}
         <>
           {!active && (
             <>
               <div className="name-category">
-                {filterCatsCategories[choosedGeneralCategory].filterName}
+                {filterCatsCategories[choosedGeneralCategoryId].filterName}
               </div>
               <div onClick={() => setactive(!active)} className="arrow-back">
                 <Svg type="arrowBack" />
@@ -107,7 +126,9 @@ const AnimalTypeFilter = (filterCategories: any) => {
             </>
           )}
           {!active &&
-            filterCatsCategories[choosedGeneralCategory].dependsCategories.map(
+            filterCatsCategories[
+              choosedGeneralCategoryId
+            ].dependsCategories.map(
               // Логика работы раздельного фильтра
               (items: any) => (
                 <AnymalItemFilter

@@ -15,10 +15,9 @@ import classNames from "classnames";
 import { ICategories } from "../../../types/types";
 import { useAppDispatch, useAppSelector } from "../../../hooks/Reduxhooks";
 import { addCategories, changeCategory } from "../../../Redux/CateggriesSlice";
-import { useDispatch } from "react-redux";
 const FilterBar: FC = () => {
   const [active, setactive] = useState("discount");
-  const Categories: ICategories[] = [
+  const animalCategories: ICategories[] = [
     {
       type: "discount",
       name: "Акции",
@@ -51,13 +50,11 @@ const FilterBar: FC = () => {
     },
   ];
   const dispatch = useAppDispatch(); // Добавляем по дефолту категории животных
-  useEffect(() => {
-    dispatch(addCategories(Categories));
-  }, []);
+  const categories = useAppSelector((state) => state.categories.categories);
+  if (!categories.length) dispatch(addCategories(animalCategories));
   useEffect(() => {
     dispatch(changeCategory(active));
-  }, [active]); // меняем категорию животных
-  const categories = useAppSelector((state) => state.categories.categories);
+  }, [active, dispatch]); // меняем категорию животных
   return (
     <div className="wrapper-filter-bar">
       <div className="filter-bar">
