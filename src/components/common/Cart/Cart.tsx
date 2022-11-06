@@ -3,13 +3,12 @@ import { useAppSelector } from "../../../hooks/Reduxhooks";
 import AnimalTypeFilter from "../AnimalTypeFilter/AnimalTypeFilter";
 import FilterSection from "../FilterSection/FilterSection";
 const Cart = () => {
-  const choosedPage = useAppSelector(
-    (state) => state.categories.choosedcategory
-  );
+  const choosedPage = useAppSelector((state) => state.categories);
   const filterCatsCategories1 = [
     {
       url: "https://www.zootovar-spb.ru//images/10/58/105823.jpg",
       filterName: "Сухие корма",
+      namePage: "Товары для кошек",
       animalCategory: "cats",
       generalNameCategory: "dryFood",
       dependsCategories: [
@@ -43,6 +42,7 @@ const Cart = () => {
     {
       url: "https://www.zootovar-spb.ru//images/10/64/106414.jpg",
       filterName: "Консервы",
+      namePage: "Товары для кошек",
       animalCategory: "cats",
       generalNameCategory: "cannedFood",
       dependsCategories: [
@@ -69,16 +69,38 @@ const Cart = () => {
       ],
     },
   ];
+  const sideBarCategories = [
+    {
+      typeFilter: "foodMaker",
+      filterName: "Производитель",
+      filterCategory: [
+        "Orijen",
+        "Hill's",
+        "Optimeal",
+        "Acana",
+        "Royal Canin",
+        "Brit Premium",
+        "KiteKat",
+        "Felix",
+        "Whiskas",
+      ],
+    },
+    {
+      typeFilter: "Popular",
+      filterName: "Популярное",
+      filterCategory: ["Felix", "Whiskas"],
+    },
+  ];
   return (
     <>
       <div className="filter-section">
-        <FilterSection />
+        <FilterSection sideBarFilterCategoriesItems={sideBarCategories} />
       </div>
       <div className="page-section">
         <div className="cart">
           <AnimalTypeFilter
             filterCategories={filterCatsCategories1}
-            namePage={choosedPage}
+            namePage={choosedPage.choosedcategory}
           />
         </div>
       </div>

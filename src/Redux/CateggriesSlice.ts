@@ -8,7 +8,7 @@ type CategoryType = {
 
 const initialState:CategoryType = {
     categories:[],
-    choosedcategory:''
+    choosedcategory:'',
 }
 
 const CateggriesSlice = createSlice({

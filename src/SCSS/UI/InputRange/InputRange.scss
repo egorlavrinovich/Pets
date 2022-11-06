@@ -4,6 +4,9 @@
   height: 100px;
   flex-direction: column;
   justify-content: space-around;
+  h4 {
+    align-self: center;
+  }
 }
 
 .filter-price-input {

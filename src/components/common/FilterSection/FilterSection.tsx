@@ -2,32 +2,22 @@ import React from "react";
 import InputCategories from "../../UI/Input/InputCategories/InputCategories";
 import InputRange from "../../UI/Input/InputRange/InputRange";
 
-const FilterSection = () => {
-  const categoriesOfProduct = {
-    typeFilter: "foodMaker",
-    filterName: "Производитель",
-    filterCategory: [
-      "Orijen",
-      "Hill's",
-      "Optimeal",
-      "Acana",
-      "Royal Canin",
-      "Brit Premium",
-      "KiteKat",
-      "Felix",
-      "Whiskas",
-    ],
-  };
-  const popularityOfProduct = {
-    typeFilter: "Popular",
-    filterName: "Популярное",
-    filterCategory: ["Felix", "Whiskas"],
-  };
+interface IFilterSectionItems {
+  typeFilter: string;
+  filterName: string;
+  filterCategory: string[];
+}
+interface IFilterSection {
+  sideBarFilterCategoriesItems: IFilterSectionItems[];
+}
+
+const FilterSection = ({ sideBarFilterCategoriesItems }: IFilterSection) => {
   return (
     <div className="filter-wrapper-brands">
       <InputRange />
-      <InputCategories categories={categoriesOfProduct} />
-      <InputCategories categories={popularityOfProduct} />
+      {sideBarFilterCategoriesItems.map((item) => (
+        <InputCategories categories={item} key={item.typeFilter} />
+      ))}
     </div>
   );
 };
