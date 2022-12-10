@@ -2,6 +2,7 @@ import React from "react";
 import { useAppSelector } from "../../../hooks/Reduxhooks";
 import AnimalTypeFilter from "../AnimalTypeFilter/AnimalTypeFilter";
 import FilterSection from "../FilterSection/FilterSection";
+import CartItem from "./CartItem/CartItem";
 const Cart = () => {
   const choosedPage = useAppSelector((state) => state.categories);
   const filterCatsCategories1 = [
@@ -102,6 +103,7 @@ const Cart = () => {
             filterCategories={filterCatsCategories1}
             namePage={choosedPage.choosedcategory}
           />
+          <CartItem />
         </div>
       </div>
     </>

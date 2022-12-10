@@ -59,7 +59,7 @@ const AnimalTypeFilter = ({ namePage, filterCategories }: IAnymalFilter) => {
   }, [choosedSlaveCategory]); // Добавление критерий для фильтра еды
   return (
     <div className="anymal-filter-block">
-      <h2>{pageName}</h2>
+      <h2 className="filter-block-name">{pageName}</h2>
       <div className="filter-block-items">
         {choosedPage.map((item: any) => (
           <div
