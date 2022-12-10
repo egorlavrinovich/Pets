@@ -5,7 +5,18 @@ const CartItem = () => {
     {
       name: "Purina PRO PLAN",
       url: "https://www.zootovar-spb.ru/images/13/29/132933.jpg",
-      price: 650,
+      availableGoods: [
+        {
+          price: 800,
+          weight: "1 кг",
+          count: "2",
+        },
+        {
+          price: 500,
+          weight: "500 г",
+          count: "12",
+        },
+      ],
       description:
         "DELICATE 7+ для кошек старше 7 лет с чувствительным пищеварением, с индейкой",
       animalCategory: "cats",
@@ -16,7 +27,18 @@ const CartItem = () => {
     {
       name: "GRANDORF",
       url: "https://www.zootovar-spb.ru/images/16/43/164340.jpg",
-      price: 650,
+      availableGoods: [
+        {
+          price: 1000,
+          weight: "2 кг",
+          count: "20",
+        },
+        {
+          price: 300,
+          weight: "200 г",
+          count: "120",
+        },
+      ],
       description:
         "Rabbit & Brown Rice Sterilised кролик с бурым рисом для стерилизованных или пожилых кошек от 1 года",
       animalCategory: "cats",
@@ -27,7 +49,84 @@ const CartItem = () => {
     {
       name: "Royal Canin",
       url: "https://www.zootovar-spb.ru/images/29/97/299769.jpg",
-      price: 550,
+      availableGoods: [
+        {
+          price: 5000,
+          weight: "10 кг",
+          count: "5",
+        },
+        {
+          price: 500,
+          weight: "200 г",
+          count: "132",
+        },
+      ],
+      description:
+        "Gastro Intestinal Moderate Calorie GIM35 (диета) с умеренным содержанием энергии для кошек при нарушении пищеварения",
+      animalCategory: "cats",
+      generalNameCategory: "dryFood",
+      slaveCategory: "old",
+      foodMaker: "Royal Canin",
+    },
+    {
+      name: "Purina PRO PLAN",
+      url: "https://www.zootovar-spb.ru/images/13/29/132933.jpg",
+      availableGoods: [
+        {
+          price: 800,
+          weight: "1 кг",
+          count: "2",
+        },
+        {
+          price: 500,
+          weight: "500 г",
+          count: "12",
+        },
+      ],
+      description:
+        "DELICATE 7+ для кошек старше 7 лет с чувствительным пищеварением, с индейкой",
+      animalCategory: "cats",
+      generalNameCategory: "dryFood",
+      slaveCategory: "old",
+      foodMaker: "Purina PRO PLAN",
+    },
+    {
+      name: "GRANDORF",
+      url: "https://www.zootovar-spb.ru/images/16/43/164340.jpg",
+      availableGoods: [
+        {
+          price: 1000,
+          weight: "2 кг",
+          count: "20",
+        },
+        {
+          price: 300,
+          weight: "200 г",
+          count: "120",
+        },
+      ],
+      description:
+        "Rabbit & Brown Rice Sterilised кролик с бурым рисом для стерилизованных или пожилых кошек от 1 года",
+      animalCategory: "cats",
+      generalNameCategory: "dryFood",
+      slaveCategory: "old",
+      foodMaker: "GRANDORF",
+    },
+    {
+      name: "Royal Canin",
+      url: "https://www.zootovar-spb.ru/images/29/97/299769.jpg",
+      availableGoods: [
+        {
+          price: 5000,
+          weight: "10 кг",
+          count: "5",
+        },
+        {
+          price: 500,
+          weight: "200 г",
+          count: "132",
+        },
+      ],
       description:
         "Gastro Intestinal Moderate Calorie GIM35 (диета) с умеренным содержанием энергии для кошек при нарушении пищеварения",
       animalCategory: "cats",
@@ -43,9 +142,20 @@ const CartItem = () => {
           <div className="cart-item-image">
             <img src={item.url} alt="Картинка" />
           </div>
-          <div className="cart-item-name">{item.name}</div>
-          <div className="cart-item-price">{item.price}</div>
-          <div className="cart-item-description">{item.description}</div>
+          <div className="cart-item-name">{item?.name}</div>
+          <div className="cart-item-description">{item?.description}</div>
+          <div className="cart-item-available-items">
+            {item?.availableGoods.map((option) => (
+              <div className="cart-item-available-items-block">
+                <div className="cart-item-available-items-block-weight">
+                  {option?.weight}
+                </div>
+                <div className="cart-item-available-items-block-price">
+                  {option?.price} руб
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       ))}
     </div>
