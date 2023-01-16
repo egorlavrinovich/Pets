@@ -112,6 +112,30 @@ const Svg: FC<ISvg> = ({ type }) => {
           </g>
         </svg>
       );
+    case "shop":
+      return (
+        <svg
+          fill="#000000"
+          height="800px"
+          width="800px"
+          version="1.1"
+          id="XMLID_269_"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <g id="shop-cart">
+            <g>
+              <circle cx="9" cy="21" r="2" />
+            </g>
+            <g>
+              <circle cx="19" cy="21" r="2" />
+            </g>
+            <g>
+              <path d="M21,18H7.2l-4-16H0V0h4.8l0.8,3H24l-3.2,11H8.3l0.5,2H21V18z M7.8,12h11.5l2-7H6L7.8,12z" />
+            </g>
+          </g>
+        </svg>
+      );
     default:
       return <>"Incorrect way"</>;
   }

@@ -1,4 +1,5 @@
 import React from "react";
+import Svg from "../../../UI/Svg/Svg";
 
 const CartItem = () => {
   const catDryFood = [
@@ -7,12 +8,12 @@ const CartItem = () => {
       url: "https://www.zootovar-spb.ru/images/13/29/132933.jpg",
       availableGoods: [
         {
-          price: 800,
+          price: 5,
           weight: "1 кг",
           count: "2",
         },
         {
-          price: 500,
+          price: 2.3,
           weight: "500 г",
           count: "12",
         },
@@ -29,12 +30,12 @@ const CartItem = () => {
       url: "https://www.zootovar-spb.ru/images/16/43/164340.jpg",
       availableGoods: [
         {
-          price: 1000,
+          price: 10,
           weight: "2 кг",
           count: "20",
         },
         {
-          price: 300,
+          price: 4.5,
           weight: "200 г",
           count: "120",
         },
@@ -51,12 +52,12 @@ const CartItem = () => {
       url: "https://www.zootovar-spb.ru/images/29/97/299769.jpg",
       availableGoods: [
         {
-          price: 5000,
+          price: 25,
           weight: "10 кг",
           count: "5",
         },
         {
-          price: 500,
+          price: 5,
           weight: "200 г",
           count: "132",
         },
@@ -73,12 +74,12 @@ const CartItem = () => {
       url: "https://www.zootovar-spb.ru/images/13/29/132933.jpg",
       availableGoods: [
         {
-          price: 800,
+          price: 8,
           weight: "1 кг",
           count: "2",
         },
         {
-          price: 500,
+          price: 5,
           weight: "500 г",
           count: "12",
         },
@@ -95,12 +96,12 @@ const CartItem = () => {
       url: "https://www.zootovar-spb.ru/images/16/43/164340.jpg",
       availableGoods: [
         {
-          price: 1000,
+          price: 15,
           weight: "2 кг",
           count: "20",
         },
         {
-          price: 300,
+          price: 4.3,
           weight: "200 г",
           count: "120",
         },
@@ -117,7 +118,7 @@ const CartItem = () => {
       url: "https://www.zootovar-spb.ru/images/29/97/299769.jpg",
       availableGoods: [
         {
-          price: 5000,
+          price: 50,
           weight: "10 кг",
           count: "5",
         },
@@ -145,13 +146,13 @@ const CartItem = () => {
           <div className="cart-item-name">{item?.name}</div>
           <div className="cart-item-description">{item?.description}</div>
           <div className="cart-item-available-items">
-            {item?.availableGoods.map((option) => (
+            {item?.availableGoods.map((option: any) => (
               <div className="cart-item-available-items-block">
                 <div className="cart-item-available-items-block-weight">
                   {option?.weight}
                 </div>
                 <div className="cart-item-available-items-block-price">
-                  {option?.price} руб
+                  {option?.price} р <Svg type="shop" />
                 </div>
               </div>
             ))}
