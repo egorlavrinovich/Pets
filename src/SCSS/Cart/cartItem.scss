@@ -78,3 +78,15 @@
 
 .cart-item-available-items-block-count {
 }
+
+.star-mark {
+    svg {
+        height: 25px;
+    }
+}
+.star-mark-active {
+    svg {
+        height: 25px;
+        fill: gold;
+    }
+}

@@ -1,7 +1,11 @@
 import React from "react";
 import Svg from "../../../UI/Svg/Svg";
+import { useState } from "react";
+import Star from "../../../UI/Star/Star";
 
 const CartItem = () => {
+  const starLength = ["", "", "", "", ""];
+  const [active, setActive] = useState(false);
   const catDryFood = [
     {
       name: "Purina PRO PLAN",
@@ -157,6 +161,9 @@ const CartItem = () => {
               </div>
             ))}
           </div>
+          {starLength.map((star: any, index) => (
+            <Star />
+          ))}
         </div>
       ))}
     </div>
