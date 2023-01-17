@@ -1,15 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import Svg from "../Svg/Svg";
-const Star = ({ setCountStars, index, star }: any) => {
+const Star = ({ index, mark }: any) => {
   const [active, setActive] = useState(false);
   return (
     <>
       <div
-        className={`star-mark${star === "choosed" ? "-active" : ""}`}
+        className={`star-mark${mark === "favorite" ? "-active" : ""}`}
         onClick={() => {
           setActive(!active);
-          setCountStars(index);
         }}
       >
         <Svg type="star" />

@@ -5,6 +5,7 @@ import Star from "../../../UI/Star/Star";
 
 const CartItem = () => {
   const [favoriteStar, setFavoriteStar] = useState(["", "", "", "", ""]);
+  const countStars = new Array(5).fill("");
   const catDryFood = [
     {
       name: "Purina PRO PLAN",
@@ -27,6 +28,10 @@ const CartItem = () => {
       generalNameCategory: "dryFood",
       slaveCategory: "old",
       foodMaker: "Purina PRO PLAN",
+      rating: {
+        mark: 1,
+        count: 0,
+      },
     },
     {
       name: "GRANDORF",
@@ -49,6 +54,10 @@ const CartItem = () => {
       generalNameCategory: "dryFood",
       slaveCategory: "old",
       foodMaker: "GRANDORF",
+      rating: {
+        mark: 2,
+        count: 0,
+      },
     },
     {
       name: "Royal Canin",
@@ -71,6 +80,10 @@ const CartItem = () => {
       generalNameCategory: "dryFood",
       slaveCategory: "old",
       foodMaker: "Royal Canin",
+      rating: {
+        mark: 3,
+        count: 0,
+      },
     },
     {
       name: "Purina PRO PLAN",
@@ -93,6 +106,10 @@ const CartItem = () => {
       generalNameCategory: "dryFood",
       slaveCategory: "old",
       foodMaker: "Purina PRO PLAN",
+      rating: {
+        mark: 4,
+        count: 0,
+      },
     },
     {
       name: "GRANDORF",
@@ -115,6 +132,10 @@ const CartItem = () => {
       generalNameCategory: "dryFood",
       slaveCategory: "old",
       foodMaker: "GRANDORF",
+      rating: {
+        mark: 5,
+        count: 0,
+      },
     },
     {
       name: "Royal Canin",
@@ -137,14 +158,13 @@ const CartItem = () => {
       generalNameCategory: "dryFood",
       slaveCategory: "old",
       foodMaker: "Royal Canin",
+      rating: {
+        mark: 0,
+        count: 0,
+      },
     },
   ];
-  function setFavoritesStar(index: any) {
-    const choosedStars = favoriteStar.map((item, i) =>
-      i <= index ? (item = "choosed") : ""
-    );
-    setFavoriteStar(choosedStars);
-  }
+  function setFavoritesStar(index: any) {}
   return (
     <div className="cart-item-block">
       {catDryFood.map((item: any) => (
@@ -166,17 +186,15 @@ const CartItem = () => {
               </div>
             ))}
           </div>
-          {Array.isArray(favoriteStar) ? (
-            favoriteStar.map((star: any, index: any) => (
-              <Star
-                setCountStars={setFavoritesStar}
-                index={index}
-                star={star}
-              />
-            ))
-          ) : (
-            <div>Nothing</div>
-          )}
+          <div>
+            {countStars.map((_, index: any) => {
+              if (item?.rating?.mark >= index) {
+                return <Star index={index} mark="favorite" />;
+              } else {
+                return <Star index={index} mark="" />;
+              }
+            })}
+          </div>
         </div>
       ))}
     </div>
