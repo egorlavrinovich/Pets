@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Svg from "../../../UI/Svg/Svg";
 import { useState } from "react";
 import Star from "../../../UI/Star/Star";
 
 const CartItem = () => {
-  const [favoriteStar, setFavoriteStar] = useState(["", "", "", "", ""]);
   const countStars = new Array(5).fill("");
   const catDryFood = [
     {
@@ -164,18 +163,32 @@ const CartItem = () => {
       },
     },
   ];
-  function setFavoritesStar(index: any) {}
+  const [goods, setGoods] = useState(catDryFood);
+
+  function setFavoriteStar(index: any, itemIndex: any) {
+    //setState();
+    const objStar = {
+      ...goods[itemIndex],
+      ...{ rating: { ...goods[itemIndex]?.rating, mark: index } },
+    };
+    const starGoods = [
+      ...goods.slice(0, itemIndex),
+      objStar,
+      ...goods.slice(itemIndex + 1, goods.length),
+    ];
+    setGoods(starGoods);
+  }
   return (
     <div className="cart-item-block">
-      {catDryFood.map((item: any) => (
-        <div className="cart-item">
+      {goods?.map((item: any, itemIndex) => (
+        <div className="cart-item" key={itemIndex}>
           <div className="cart-item-image">
             <img src={item.url} alt="Картинка" />
           </div>
           <div className="cart-item-name">{item?.name}</div>
           <div className="cart-item-description">{item?.description}</div>
           <div className="cart-item-available-items">
-            {item?.availableGoods.map((option: any) => (
+            {item?.availableGoods?.map((option: any) => (
               <div className="cart-item-available-items-block">
                 <div className="cart-item-available-items-block-weight">
                   {option?.weight}
@@ -187,11 +200,19 @@ const CartItem = () => {
             ))}
           </div>
           <div>
-            {countStars.map((_, index: any) => {
+            {countStars?.map((_, index: any) => {
               if (item?.rating?.mark >= index) {
-                return <Star index={index} mark="favorite" />;
+                return (
+                  <div onClick={() => setFavoriteStar(index, itemIndex)}>
+                    <Star index={index} mark="favorite" />
+                  </div>
+                );
               } else {
-                return <Star index={index} mark="" />;
+                return (
+                  <div onClick={() => setFavoriteStar(index, itemIndex)}>
+                    <Star index={index} mark="" />
+                  </div>
+                );
               }
             })}
           </div>
