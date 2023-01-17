@@ -22,7 +22,7 @@ const InputCategories = (props: IInputCategories) => {
 
   return (
     <div className="categories-goods">
-      <h4>{props.categories.filterName}</h4>
+      <h5>{props.categories.filterName}</h5>
       {props.categories.filterCategory.map((item) => {
         return (
           <div className="categories-food" key={item}>

@@ -12,20 +12,15 @@
 .filter-price-input {
   width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   input {
-    width: 20%;
-    box-sizing: border-box;
-    line-height: 3vh;
+    max-width: 30%;
     border-radius: 5px;
     border: 1px solid gold;
-    background-color: rgba(255, 255, 255, 0.938);
-    outline: none;
-    font-size: large;
+    font-size: auto;
     &:focus {
       border: 1px solid gold;
     }
-    color: gray;
   }
 }
 

@@ -3,6 +3,7 @@ import { useAppSelector } from "../../../hooks/Reduxhooks";
 import AnimalTypeFilter from "../AnimalTypeFilter/AnimalTypeFilter";
 import FilterSection from "../FilterSection/FilterSection";
 import CartItem from "./CartItem/CartItem";
+import Svg from "../../UI/Svg/Svg";
 const Cart = () => {
   const choosedPage = useAppSelector((state) => state.categories);
   const filterCatsCategories1 = [
@@ -95,6 +96,9 @@ const Cart = () => {
   return (
     <>
       <div className="filter-section">
+        <div className="burgerMenu">
+          <Svg type="burger-menu" />
+        </div>
         <FilterSection sideBarFilterCategoriesItems={sideBarCategories} />
       </div>
       <div className="page-section">

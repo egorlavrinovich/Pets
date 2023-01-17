@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import Svg from "../../../UI/Svg/Svg";
 import { useState } from "react";
 import Star from "../../../UI/Star/Star";
@@ -166,7 +165,6 @@ const CartItem = () => {
   const [goods, setGoods] = useState(catDryFood);
 
   function setFavoriteStar(index: any, itemIndex: any) {
-    //setState();
     const objStar = {
       ...goods[itemIndex],
       ...{ rating: { ...goods[itemIndex]?.rating, mark: index } },
