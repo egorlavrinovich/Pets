@@ -4,8 +4,7 @@ import { useState } from "react";
 import Star from "../../../UI/Star/Star";
 
 const CartItem = () => {
-  const starLength = ["", "", "", "", ""];
-  const [active, setActive] = useState(false);
+  const [favoriteStar, setFavoriteStar] = useState(["", "", "", "", ""]);
   const catDryFood = [
     {
       name: "Purina PRO PLAN",
@@ -140,6 +139,12 @@ const CartItem = () => {
       foodMaker: "Royal Canin",
     },
   ];
+  function setFavoritesStar(index: any) {
+    const choosedStars = favoriteStar.map((item, i) =>
+      i <= index ? (item = "choosed") : ""
+    );
+    setFavoriteStar(choosedStars);
+  }
   return (
     <div className="cart-item-block">
       {catDryFood.map((item: any) => (
@@ -161,9 +166,17 @@ const CartItem = () => {
               </div>
             ))}
           </div>
-          {starLength.map((star: any, index) => (
-            <Star />
-          ))}
+          {Array.isArray(favoriteStar) ? (
+            favoriteStar.map((star: any, index: any) => (
+              <Star
+                setCountStars={setFavoritesStar}
+                index={index}
+                star={star}
+              />
+            ))
+          ) : (
+            <div>Nothing</div>
+          )}
         </div>
       ))}
     </div>
