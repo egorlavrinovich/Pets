@@ -4,20 +4,22 @@
   height: 100px;
   flex-direction: column;
   justify-content: space-around;
-  h4 {
+  h5 {
     align-self: center;
   }
 }
 
 .filter-price-input {
-  width: 100%;
   display: flex;
   justify-content: space-between;
+  box-sizing: border-box;
+
   input {
-    max-width: 30%;
+    width: 40%;
+    height: 75%;
     border-radius: 5px;
     border: 1px solid gold;
-    font-size: auto;
+    padding-left: 12%;
     &:focus {
       border: 1px solid gold;
     }

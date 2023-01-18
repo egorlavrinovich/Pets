@@ -40,7 +40,8 @@ input:checked + .stlchek:before {
     align-items: center;
 }
 .categories-food {
-    width: 40%;
+    width: inherit;
+    padding: 1% 10%;
 }
 @media screen and (max-width: 1000px) {
     .categories-food-label {

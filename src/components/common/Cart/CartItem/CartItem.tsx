@@ -165,6 +165,7 @@ const CartItem = () => {
   const [goods, setGoods] = useState(catDryFood);
 
   function setFavoriteStar(index: any, itemIndex: any) {
+    // Добавление звезд в массив товаров
     const objStar = {
       ...goods[itemIndex],
       ...{ rating: { ...goods[itemIndex]?.rating, mark: index } },
@@ -199,6 +200,7 @@ const CartItem = () => {
           </div>
           <div>
             {countStars?.map((_, index: any) => {
+              // Выбор количества звёзд
               if (item?.rating?.mark >= index) {
                 return (
                   <div onClick={() => setFavoriteStar(index, itemIndex)}>

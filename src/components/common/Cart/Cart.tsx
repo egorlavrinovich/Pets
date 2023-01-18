@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAppSelector } from "../../../hooks/Reduxhooks";
 import AnimalTypeFilter from "../AnimalTypeFilter/AnimalTypeFilter";
 import FilterSection from "../FilterSection/FilterSection";
@@ -93,13 +93,16 @@ const Cart = () => {
       filterCategory: ["Felix", "Whiskas"],
     },
   ];
+  const [burgerMenu, setBurgerMenu] = useState(true);
   return (
     <>
       <div className="filter-section">
-        <div className="burgerMenu">
+        <div className="burgerMenu" onClick={() => setBurgerMenu(!burgerMenu)}>
           <Svg type="burger-menu" />
         </div>
-        <FilterSection sideBarFilterCategoriesItems={sideBarCategories} />
+        {burgerMenu && (
+          <FilterSection sideBarFilterCategoriesItems={sideBarCategories} />
+        )}
       </div>
       <div className="page-section">
         <div className="cart">
