@@ -3,15 +3,16 @@
     display: flex;
     background-color: white;
     gap: 4%;
-    justify-content: space-between;
     flex-wrap: wrap;
+    justify-content: flex-start;
 }
 .cart-item {
     display: flex;
     flex-direction: column;
-    max-width: 180px;
     gap: 1vh;
     margin-bottom: 2vh;
+    flex: 0 1 310px;
+    margin: 0 auto;
 }
 .cart-item-image {
     display: flex;
