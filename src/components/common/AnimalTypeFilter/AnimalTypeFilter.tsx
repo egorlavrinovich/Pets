@@ -13,7 +13,7 @@ const AnimalTypeFilter = ({ namePage, filterCategories }: IAnymalFilter) => {
   const [active, setactive] = useState<boolean>(true); // делаем окно видимым
   const [pageName, setPageName] = useState<string>("");
   const [choosedGeneralCategoryId, setChoosedGeneralCategoryId] =
-    useState<number>(0); // Выбираем категорию фильтра
+    useState<number>(1); // Выбираем категорию фильтра
   const [choosedSlaveCategory, setChoosedSlaveCategory] = useState<string>(""); // Выбираем подкатегорию фильтра
   const allCategories = useAppSelector((state) => state.categories.categories);
 
@@ -43,8 +43,9 @@ const AnimalTypeFilter = ({ namePage, filterCategories }: IAnymalFilter) => {
   function inditificateCategory(url: string) {
     const choosedCategoryId = choosedPage.findIndex((item) => item.url === url); // Ф-ция поиска выбранной катеогрии для дальнейшего вывода подкатегории
     setChoosedGeneralCategoryId(choosedCategoryId);
+    console.log(choosedPage[choosedGeneralCategoryId]?.dependsCategories);
   }
-
+  debugger;
   useEffect(() => {
     dispatch(
       addFoodCategories([
@@ -63,17 +64,15 @@ const AnimalTypeFilter = ({ namePage, filterCategories }: IAnymalFilter) => {
       <div className="filter-block-items">
         {choosedPage.map((item: any) => (
           <div
-            className="filter-item"
+            className={active ? "filter-item" : "filter-item-disable"}
             key={item.url}
             onClick={() => inditificateCategory(item.url)}
           >
-            {active && (
-              <AnymalItemFilter
-                active={active}
-                setactive={setactive}
-                categories={item}
-              />
-            )}
+            <AnymalItemFilter
+              active={active}
+              setactive={setactive}
+              categories={item}
+            />
           </div>
         ))}
         <>
