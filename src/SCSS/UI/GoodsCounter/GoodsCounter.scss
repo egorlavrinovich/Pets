@@ -1,0 +1,26 @@
+.cart-item-available-items-block-counter {
+    width: 20%;
+    line-height: 120%;
+}
+.counter-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.counter-block-plus,
+.counter-block-minus {
+    color: gold;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    font-size: larger;
+    align-items: center;
+    cursor: pointer;
+    align-items: center;
+}
+.counter-block-count {
+    font-weight: 600;
+    padding: 0 4%;
+    border-radius: 5px;
+}

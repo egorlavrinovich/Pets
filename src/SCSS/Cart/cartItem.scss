@@ -54,13 +54,12 @@
     align-items: center;
     justify-content: space-between;
     line-height: 5vh;
-    cursor: pointer;
     svg {
         fill: rgb(255, 187, 0);
         height: 20px;
         width: 20px;
+        cursor: pointer;
         :hover {
-            cursor: pointer;
             fill: goldenrod;
         }
     }
@@ -70,19 +69,53 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    width: 23%;
 }
 
 .cart-item-available-items-block-weight {
     display: flex;
     flex-direction: column;
+    width: 20%;
 }
 .cart-item-available-items-block-goods {
     display: flex;
     gap: 5px;
+    line-height: 0%;
+    svg {
+        width: 11px;
+        height: 10px;
+    }
+}
+.available-much {
+    svg {
+        fill: green;
+        :hover {
+            fill: green;
+        }
+    }
+}
+.available-medium {
     svg {
         fill: gold;
-        width: 11px;
-        height: min-content;
+        :hover {
+            fill: gold;
+        }
+    }
+}
+.available-none {
+    svg {
+        fill: rgb(220, 216, 216);
+        :hover {
+            fill: rgb(220, 216, 216);
+        }
+    }
+}
+.available-minimum {
+    svg {
+        fill: red;
+        :hover {
+            fill: red;
+        }
     }
 }
 

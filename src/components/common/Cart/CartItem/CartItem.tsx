@@ -1,6 +1,7 @@
 import Svg from "../../../UI/Svg/Svg";
 import { useState } from "react";
 import Star from "../../../UI/Star/Star";
+import GoodsCounter from "../../../UI/GoodsCounter/GoodsCounter";
 
 const CartItem = () => {
   const countStars = new Array(5).fill(""); // Количество звёзд
@@ -13,12 +14,12 @@ const CartItem = () => {
         {
           price: 5,
           weight: "1 кг",
-          count: "2",
+          count: 2,
         },
         {
           price: 2.3,
           weight: "500 г",
-          count: "12",
+          count: 12,
         },
       ],
       description:
@@ -39,12 +40,12 @@ const CartItem = () => {
         {
           price: 10,
           weight: "2 кг",
-          count: "20",
+          count: 20,
         },
         {
           price: 4.5,
           weight: "200 г",
-          count: "120",
+          count: 120,
         },
       ],
       description:
@@ -65,12 +66,12 @@ const CartItem = () => {
         {
           price: 25,
           weight: "10 кг",
-          count: "5",
+          count: 5,
         },
         {
           price: 5,
           weight: "200 г",
-          count: "132",
+          count: 132,
         },
       ],
       description:
@@ -91,12 +92,12 @@ const CartItem = () => {
         {
           price: 8,
           weight: "1 кг",
-          count: "2",
+          count: 2,
         },
         {
           price: 5,
           weight: "500 г",
-          count: "12",
+          count: 12,
         },
       ],
       description:
@@ -117,12 +118,12 @@ const CartItem = () => {
         {
           price: 15,
           weight: "2 кг",
-          count: "20",
+          count: 20,
         },
         {
           price: 4.3,
           weight: "200 г",
-          count: "120",
+          count: 120,
         },
       ],
       description:
@@ -143,12 +144,12 @@ const CartItem = () => {
         {
           price: 50,
           weight: "10 кг",
-          count: "5",
+          count: 5,
         },
         {
           price: 500,
           weight: "200 г",
-          count: "132",
+          count: 132,
         },
       ],
       description:
@@ -178,6 +179,24 @@ const CartItem = () => {
     ];
     setGoods(starGoods);
   }
+  function setAvalaibleItems(countGoods: number) {
+    // Функция вычисления количества товаров => определённое количество кирпичиков
+    const map = {
+      minimumGoods: ["available-minimum", "available-none", "available-none"],
+      mediumGoods: ["available-medium", "available-medium", "available-none"],
+      enoughGoods: ["available-much", "available-much", "available-much"],
+    };
+    switch (true) {
+      case countGoods < 15:
+        return map.minimumGoods;
+      case countGoods > 15 && countGoods < 50:
+        return map.mediumGoods;
+      case countGoods > 50:
+        return map.enoughGoods;
+      default:
+        return ["available-none", "available-none", "available-none"];
+    }
+  }
   return (
     <div className="cart-item-block">
       {goods?.map((item: any, itemIndex) => (
@@ -195,10 +214,16 @@ const CartItem = () => {
                     {option?.weight}
                   </div>
                   <div className="cart-item-available-items-block-goods">
-                    {countAvailableRectangles.map((_) => (
-                      <Svg type="available" />
+                    {/* Мапим прямоугольники */}
+                    {countAvailableRectangles.map((_, index) => (
+                      <div className={setAvalaibleItems(option?.count)[index]}>
+                        <Svg type="available" />
+                      </div>
                     ))}
                   </div>
+                </div>
+                <div className="cart-item-available-items-block-counter">
+                  <GoodsCounter />
                 </div>
                 <div className="cart-item-available-items-block-price">
                   {option?.price} р <Svg type="shop" />
