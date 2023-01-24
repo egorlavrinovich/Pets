@@ -45,7 +45,6 @@ const AnimalTypeFilter = ({ namePage, filterCategories }: IAnymalFilter) => {
     setChoosedGeneralCategoryId(choosedCategoryId);
     console.log(choosedPage[choosedGeneralCategoryId]?.dependsCategories);
   }
-  debugger;
   useEffect(() => {
     dispatch(
       addFoodCategories([

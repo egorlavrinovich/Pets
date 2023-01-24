@@ -177,6 +177,23 @@ const Svg: FC<ISvg> = ({ type }) => {
           </defs>
         </svg>
       );
+    case "available":
+      return (
+        <svg
+          fill="#000000"
+          version="1.1"
+          id="Capa_1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20.969 20.969"
+        >
+          <g>
+            <g id="c112_-">
+              <rect x="0" y="6.504" width="20.969" height="7.961" />
+            </g>
+            <g id="Capa_1_45_"></g>
+          </g>
+        </svg>
+      );
     default:
       return <>"Incorrect way"</>;
   }

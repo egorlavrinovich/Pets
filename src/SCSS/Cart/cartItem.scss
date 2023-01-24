@@ -2,7 +2,7 @@
     width: 100%;
     display: flex;
     background-color: white;
-    gap: 4%;
+    gap: 2rem;
     flex-wrap: wrap;
     justify-content: flex-start;
 }
@@ -30,7 +30,7 @@
 .cart-item-description {
     line-height: initial;
     cursor: pointer;
-    max-height: 130px;
+    max-height: 100px;
     overflow: hidden;
     :hover {
         text-decoration: underline;
@@ -44,7 +44,7 @@
     display: flex;
     flex-direction: column;
     background-color: #e7f8f5;
-    border-radius: 10%;
+    border-radius: 15px;
     height: 15;
     padding: 0 5%;
 }
@@ -53,12 +53,12 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    line-height: 3vh;
+    line-height: 5vh;
     cursor: pointer;
     svg {
-        fill: gold;
-        height: 2vh;
-        width: 1vw;
+        fill: rgb(255, 187, 0);
+        height: 20px;
+        width: 20px;
         :hover {
             cursor: pointer;
             fill: goldenrod;
@@ -74,21 +74,50 @@
 
 .cart-item-available-items-block-weight {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+}
+.cart-item-available-items-block-goods {
+    display: flex;
+    gap: 5px;
+    svg {
+        fill: gold;
+        width: 11px;
+        height: min-content;
+    }
 }
 
 .cart-item-available-items-block-count {
 }
 
+.star-block {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 5%;
+}
+.star-block-rating {
+    display: flex;
+    flex-direction: column;
+}
+.star-block-rating-star {
+    display: flex;
+}
+.star-block-rating-mark {
+    display: flex;
+    font-size: small;
+}
+.star-block-review {
+    font-size: small;
+    align-self: flex-end;
+}
+
 .star-mark {
     svg {
-        height: 25px;
+        height: 2vh;
     }
 }
 .star-mark-active {
     svg {
-        height: 25px;
+        height: 2vh;
         fill: gold;
     }
 }

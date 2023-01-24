@@ -3,7 +3,8 @@ import { useState } from "react";
 import Star from "../../../UI/Star/Star";
 
 const CartItem = () => {
-  const countStars = new Array(5).fill("");
+  const countStars = new Array(5).fill(""); // Количество звёзд
+  const countAvailableRectangles = new Array(3).fill(""); // 3 блока доступности товара
   const catDryFood = [
     {
       name: "Purina PRO PLAN",
@@ -190,31 +191,48 @@ const CartItem = () => {
             {item?.availableGoods?.map((option: any) => (
               <div className="cart-item-available-items-block">
                 <div className="cart-item-available-items-block-weight">
-                  {option?.weight}
+                  <div className="cart-item-available-items-block-weight-value">
+                    {option?.weight}
+                  </div>
+                  <div className="cart-item-available-items-block-goods">
+                    {countAvailableRectangles.map((_) => (
+                      <Svg type="available" />
+                    ))}
+                  </div>
                 </div>
                 <div className="cart-item-available-items-block-price">
                   {option?.price} р <Svg type="shop" />
                 </div>
               </div>
             ))}
-          </div>
-          <div>
-            {countStars?.map((_, index: any) => {
-              // Выбор количества звёзд
-              if (item?.rating?.mark >= index) {
-                return (
-                  <div onClick={() => setFavoriteStar(index, itemIndex)}>
-                    <Star index={index} mark="favorite" />
-                  </div>
-                );
-              } else {
-                return (
-                  <div onClick={() => setFavoriteStar(index, itemIndex)}>
-                    <Star index={index} mark="" />
-                  </div>
-                );
-              }
-            })}
+            <div className="star-block">
+              <div className="star-block-review">
+                Отзывы: {item?.rating?.count}
+              </div>
+              <div className="star-block-rating">
+                <div className="star-block-rating-star">
+                  {countStars?.map((_, index: any) => {
+                    // Выбор количества звёзд
+                    if (item?.rating?.mark >= index) {
+                      return (
+                        <div onClick={() => setFavoriteStar(index, itemIndex)}>
+                          <Star index={index} mark="favorite" />
+                        </div>
+                      );
+                    } else {
+                      return (
+                        <div onClick={() => setFavoriteStar(index, itemIndex)}>
+                          <Star index={index} mark="" />
+                        </div>
+                      );
+                    }
+                  })}
+                </div>
+                <div className="star-block-rating-mark">
+                  Рейтинг: {item?.rating?.mark + 1}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       ))}
