@@ -2,6 +2,7 @@ import Svg from "../../../UI/Svg/Svg";
 import { useState } from "react";
 import Star from "../../../UI/Star/Star";
 import GoodsCounter from "../../../UI/GoodsCounter/GoodsCounter";
+import CartItemPrice from "../CartItemPrice/CartItemPrice";
 
 const CartItem = () => {
   const countStars = new Array(5).fill(""); // Количество звёзд
@@ -197,6 +198,9 @@ const CartItem = () => {
         return ["available-none", "available-none", "available-none"];
     }
   }
+  function addGoodsToBasket(goods: any, count: any) {
+    const choosedGoods = {};
+  }
   return (
     <div className="cart-item-block">
       {goods?.map((item: any, itemIndex) => (
@@ -207,27 +211,13 @@ const CartItem = () => {
           <div className="cart-item-name">{item?.name}</div>
           <div className="cart-item-description">{item?.description}</div>
           <div className="cart-item-available-items">
-            {item?.availableGoods?.map((option: any) => (
-              <div className="cart-item-available-items-block">
-                <div className="cart-item-available-items-block-weight">
-                  <div className="cart-item-available-items-block-weight-value">
-                    {option?.weight}
-                  </div>
-                  <div className="cart-item-available-items-block-goods">
-                    {/* Мапим прямоугольники */}
-                    {countAvailableRectangles.map((_, index) => (
-                      <div className={setAvalaibleItems(option?.count)[index]}>
-                        <Svg type="available" />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="cart-item-available-items-block-counter">
-                  <GoodsCounter />
-                </div>
-                <div className="cart-item-available-items-block-price">
-                  {option?.price} р <Svg type="shop" />
-                </div>
+            {item?.availableGoods?.map((option: any, index: number) => (
+              <div key={Date.now() + index}>
+                <CartItemPrice
+                  option={option}
+                  countAvailableRectangles={countAvailableRectangles}
+                  setAvalaibleItems={setAvalaibleItems}
+                />
               </div>
             ))}
             <div className="star-block">
