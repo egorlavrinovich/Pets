@@ -1,21 +1,22 @@
 import React, { useState, ChangeEvent } from "react";
 import Svg from "../Svg/Svg";
-const GoodsCounter = () => {
+const GoodsCounter = (counter: any) => {
   const [count, setCount] = useState(1);
+  counter = count;
   return (
     <div className="counter-block">
       <div
         className="counter-block-minus"
-        onClick={() => setCount((x) => x - 1)}
+        onClick={() => setCount((x) => (x > 1 && x - 1) || 1)}
       >
-        {/* <Svg type="minus" /> */}-
+        <Svg type="minus" />
       </div>
       <div className="counter-block-count">{count}</div>
       <div
         className="counter-block-plus"
         onClick={() => setCount((x) => x + 1)}
       >
-        {/* <Svg type="plus" /> */}+
+        <Svg type="plus" />
       </div>
     </div>
   );
