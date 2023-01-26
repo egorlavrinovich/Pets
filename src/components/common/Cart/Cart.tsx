@@ -4,6 +4,7 @@ import AnimalTypeFilter from "../AnimalTypeFilter/AnimalTypeFilter";
 import FilterSection from "../FilterSection/FilterSection";
 import CartItem from "./CartItem/CartItem";
 import Svg from "../../UI/Svg/Svg";
+import Slider from "../../UI/Slider/Slider";
 const Cart = () => {
   const choosedPage = useAppSelector((state) => state.categories);
   const filterCatsCategories1 = [

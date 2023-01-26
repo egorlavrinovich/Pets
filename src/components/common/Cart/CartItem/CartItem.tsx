@@ -3,7 +3,7 @@ import { useState } from "react";
 import Star from "../../../UI/Star/Star";
 import GoodsCounter from "../../../UI/GoodsCounter/GoodsCounter";
 import CartItemPrice from "../CartItemPrice/CartItemPrice";
-
+import GoodsModal from "../../../UI/Modal/GoodsModal";
 const CartItem = () => {
   const countStars = new Array(5).fill(""); // Количество звёзд
   const countAvailableRectangles = new Array(3).fill(""); // 3 блока доступности товара
@@ -166,6 +166,7 @@ const CartItem = () => {
     },
   ];
   const [goods, setGoods] = useState(catDryFood);
+  const [isOpen, setIsOpen] = useState(false);
 
   function setFavoriteStar(index: any, itemIndex: any) {
     // Добавление звезд в массив товаров
@@ -205,11 +206,16 @@ const CartItem = () => {
     <div className="cart-item-block">
       {goods?.map((item: any, itemIndex) => (
         <div className="cart-item" key={itemIndex}>
-          <div className="cart-item-image">
-            <img src={item.url} alt="Картинка" />
+          <div
+            className="cart-item-block-description"
+            onClick={() => setIsOpen(true)}
+          >
+            <div className="cart-item-image">
+              <img src={item.url} alt="Картинка" />
+            </div>
+            <div className="cart-item-name">{item?.name}</div>
+            <div className="cart-item-description">{item?.description}</div>
           </div>
-          <div className="cart-item-name">{item?.name}</div>
-          <div className="cart-item-description">{item?.description}</div>
           <div className="cart-item-available-items">
             {item?.availableGoods?.map((option: any, index: number) => (
               <div key={Date.now() + index}>
@@ -249,6 +255,7 @@ const CartItem = () => {
               </div>
             </div>
           </div>
+          {isOpen && <GoodsModal isOpen={isOpen} setIsOpen={setIsOpen} />}
         </div>
       ))}
     </div>
