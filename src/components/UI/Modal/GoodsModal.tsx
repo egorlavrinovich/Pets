@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 interface IGoodsModal {
   isOpen: boolean;
@@ -6,14 +6,23 @@ interface IGoodsModal {
 }
 
 const GoodsModal: React.FC<IGoodsModal> = ({ isOpen, setIsOpen }) => {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+      setIsOpen(false);
+    }
+  };
+
   return (
     <>
       {isOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <p>This is the content of the modal</p>
-            <button onClick={() => setIsOpen(false)}>Close Modal</button>
+        <div className="modal" onClick={handleClick}>
+          <div className="modal-content" ref={modalRef}>
+            Modal Content
           </div>
+          <button onClick={() => setIsOpen(false)}>Close</button>
         </div>
       )}
     </>
