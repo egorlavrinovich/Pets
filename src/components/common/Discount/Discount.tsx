@@ -1,30 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { useAppSelector } from "../../../hooks/Reduxhooks";
-// @ts-ignore
-import images from "./Allimports";
+import { IMAGES_DISCOUNT } from "../../constants/contants";
 import { ArrowLeft, ArrowRight } from "react-bootstrap-icons";
 import { UseAdv } from "../../../hooks/UseAdv";
 const Discount = React.memo(() => {
+  const { activeImage, generateActiveImageMap } = UseAdv(
+    IMAGES_DISCOUNT,
+    "top-image"
+  ); // кастомный хук для рекламного баннера
   const [activeblock, setactiveblock] = useState(true);
-  const Available = useAppSelector((state) => state.categories.choosedcategory);
+
+  const choosedCategory = useAppSelector(
+    (state) => state.categories.choosedcategory
+  );
+
   useEffect(() => {
-    if (Available === "discount") setactiveblock(true);
+    if (choosedCategory === "discount") setactiveblock(true);
     else setactiveblock(false);
-  }, [Available]);
-  const { activeimage, SpinBlock, Times } = UseAdv(); // кастомный хук для рекламного баннера
-  Times(images.length - 1, 4000, activeblock); // кастомный хук для рекламного баннера
+  }, [choosedCategory]);
+
   return (
     <>
       {activeblock && (
         <div className="discount-wrapper">
           <div className="discount-block">
-            <div onClick={() => SpinBlock("left")} className="left-but">
+            <div onClick={generateActiveImageMap["left"]} className="left-but">
               <ArrowLeft />
             </div>
-            <div className="top-image">
-              <img src={images[activeimage]} alt="discountImage" />
+            <div className="top-image-block">
+              <img
+                className="top-image"
+                src={IMAGES_DISCOUNT[activeImage]}
+                alt="discountImage"
+              />
             </div>
-            <div onClick={() => SpinBlock("right")} className="right-but">
+            <div
+              onClick={generateActiveImageMap["right"]}
+              className="right-but"
+            >
               <ArrowRight />
             </div>
           </div>

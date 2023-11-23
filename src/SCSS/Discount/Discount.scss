@@ -36,7 +36,7 @@
   right: 0;
 }
 
-.top-image {
+.top-image-block {
   display: flex;
   width: 100%;
   max-height: 30vh;
@@ -62,7 +62,7 @@
 }
 
 @media screen and (max-width: 600px) {
-  .top-image {
+  .top-image-block {
     display: flex;
     width: 100%;
     min-height: 15vh;
@@ -71,5 +71,19 @@
       width: 100%;
       background-size: cover;
     }
+  }
+}
+
+.anim {
+  opacity: 0.4;
+  animation: ani 3s forwards;
+}
+
+@keyframes ani {
+  0% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
   }
 }
