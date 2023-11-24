@@ -1,27 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useAppSelector } from "../../../hooks/Reduxhooks";
-import { IMAGES_DISCOUNT } from "../../constants/contants";
+import React from "react";
 import { ArrowLeft, ArrowRight } from "react-bootstrap-icons";
+import { useSearchParams } from "react-router-dom";
 import { UseAdv } from "../../../hooks/UseAdv";
+import { IMAGES_DISCOUNT } from "../../constants/contants";
 const Discount = React.memo(() => {
   const { activeImage, generateActiveImageMap } = UseAdv(
     IMAGES_DISCOUNT,
     "top-image"
   ); // кастомный хук для рекламного баннера
-  const [activeblock, setactiveblock] = useState(true);
-
-  const choosedCategory = useAppSelector(
-    (state) => state.categories.choosedcategory
-  );
-
-  useEffect(() => {
-    if (choosedCategory === "discount") setactiveblock(true);
-    else setactiveblock(false);
-  }, [choosedCategory]);
-
+  const [activeFilter, _] = useSearchParams();
+  const isActivePage = activeFilter.get("animalCategory") === "discount";
   return (
     <>
-      {activeblock && (
+      {isActivePage && (
         <div className="discount-wrapper">
           <div className="discount-block">
             <div onClick={generateActiveImageMap["left"]} className="left-but">

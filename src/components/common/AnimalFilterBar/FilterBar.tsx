@@ -1,74 +1,31 @@
-import React, { useState, FC, useEffect } from "react";
-// @ts-ignore
-import cats from "../../../assets/ico/cat.ico";
-// @ts-ignore
-import dogs from "../../../assets/ico/dog.ico";
-// @ts-ignore
-import fish from "../../../assets/ico/fish.ico";
-// @ts-ignore
-import bird from "../../../assets/ico/bird.ico";
-// @ts-ignore
-import rats from "../../../assets/ico/rat.ico";
-// @ts-ignore
-import discount from "../../../assets/ico/discont.ico";
 import classNames from "classnames";
-import { ICategories } from "../../../types/types";
-import { useAppDispatch, useAppSelector } from "../../../hooks/Reduxhooks";
-import { addCategories, changeCategory } from "../../../Redux/CateggriesSlice";
+import { FC } from "react";
+import { useSearchParams } from "react-router-dom";
+import { ANIMAL_CATEGORIES } from "../../constants/contants";
+
 const FilterBar: FC = () => {
-  const [active, setactive] = useState("discount");
-  const animalCategories: ICategories[] = [
-    {
-      type: "discount",
-      name: "Акции",
-      url: discount,
-    },
-    {
-      type: "cats",
-      name: "Кошки",
-      url: cats,
-    },
-    {
-      type: "dogs",
-      name: "Собаки",
-      url: dogs,
-    },
-    {
-      type: "rats",
-      name: "Грызуны",
-      url: rats,
-    },
-    {
-      type: "fish",
-      name: "Рыбы",
-      url: fish,
-    },
-    {
-      type: "bird",
-      name: "Птицы",
-      url: bird,
-    },
-  ];
-  const dispatch = useAppDispatch(); // Добавляем по дефолту категории животных
-  const categories = useAppSelector((state) => state.categories.categories);
-  if (!categories.length) dispatch(addCategories(animalCategories));
-  useEffect(() => {
-    dispatch(changeCategory(active));
-  }, [active, dispatch]); // меняем категорию животных
+  const [activeFilter, setActiveFilter] = useSearchParams();
+
+  const setChoosedCategory = (animalCategory = "discount") =>
+    setActiveFilter({ animalCategory });
+
+  const isActiveCategory = (category: string) =>
+    activeFilter.get("animalCategory") === category;
+
   return (
     <div className="wrapper-filter-bar">
       <div className="filter-bar">
-        {categories.map((item, index) => (
+        {ANIMAL_CATEGORIES.map((item, index) => (
           <div
             key={index}
-            onClick={() => setactive(item.type)}
-            className={classNames(`${item.type}`, {
-              active: active === item.type,
+            onClick={() => setChoosedCategory(item.route)}
+            className={classNames(`${item.route}`, {
+              active: isActiveCategory(item.route),
             })}
           >
             <div className="name">{item.name}</div>
             <div className="svg">
-              <img src={item.url} alt={item.name} />
+              <img src={item.imgUrl} alt={item.name} />
             </div>
           </div>
         ))}
