@@ -5,8 +5,10 @@ import FilterSection from "../FilterSection/FilterSection";
 import CartItem from "./CartItem/CartItem";
 import Svg from "../../UI/Svg/Svg";
 import Slider from "../../UI/Slider/Slider";
+import { useSearchParams } from "react-router-dom";
 const Cart = () => {
-  const choosedPage = useAppSelector((state) => state.categories);
+  const [categoryPage, _] = useSearchParams();
+
   const filterCatsCategories1 = [
     {
       url: "https://www.zootovar-spb.ru//images/10/58/105823.jpg",
@@ -109,7 +111,7 @@ const Cart = () => {
         <div className="cart">
           <AnimalTypeFilter
             filterCategories={filterCatsCategories1}
-            namePage={choosedPage.choosedcategory}
+            namePage={categoryPage.get("animalCategory")}
           />
           <CartItem />
         </div>

@@ -1,67 +1,52 @@
-import React from "react";
-import { useState, useEffect, useMemo } from "react";
-import { useAppDispatch, useAppSelector } from "../../../hooks/Reduxhooks";
-import Svg from "../../UI/Svg/Svg";
+import { useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import AnymalItemFilter from "./AnymalItemFilter";
-import { addFoodCategories } from "../../../Redux/FilterSlice";
+import DependedFilterCategories from "./DependedFilterCategories/DependedFilterCategories";
+
 interface IAnymalFilter {
-  namePage: string;
+  namePage: any;
   filterCategories: any[];
 }
 
-const AnimalTypeFilter = ({ namePage, filterCategories }: IAnymalFilter) => {
-  const [active, setactive] = useState<boolean>(true); // делаем окно видимым
-  const [pageName, setPageName] = useState<string>("");
-  const [choosedGeneralCategoryId, setChoosedGeneralCategoryId] =
-    useState<number>(1); // Выбираем категорию фильтра
+const AnimalTypeFilter = ({ filterCategories }: IAnymalFilter) => {
+  const [active, setActive] = useState<boolean>(true); // делаем окно видимым
+  const [choosedGeneralCategory, setChoosedGeneralCategory] = useState<any>([]); // Выбираем категорию фильтра
   const [choosedSlaveCategory, setChoosedSlaveCategory] = useState<string>(""); // Выбираем подкатегорию фильтра
-  const allCategories = useAppSelector((state) => state.categories.categories);
 
-  function filterCategoryItemsNamePage(
-    categoryItems: any[],
-    nameCategory: string
-  ) {
-    return categoryItems.filter((item) => item.animalCategory === nameCategory); // Выполняют ф-цию фильтра категорий на странице
-  }
+  const [currentCategory, setCurrentCategory] = useState<any>();
 
-  function findNamePage(arrCategories: any[], name: string) {
-    // Ищем название страницы
-    setPageName(
-      arrCategories.find(
-        (item) => item?.type === name && item?.type !== "discount"
-      )?.name
-    );
-  }
-
-  const choosedPage = useMemo(() => {
-    findNamePage(allCategories, namePage);
-    return filterCategoryItemsNamePage(filterCategories, namePage);
-  }, [namePage, filterCategories, allCategories]);
-
-  const dispatch = useAppDispatch();
+  const [animalCategories, setAnimalCategories] = useSearchParams();
 
   function inditificateCategory(url: string) {
-    const choosedCategoryId = choosedPage.findIndex((item) => item.url === url); // Ф-ция поиска выбранной катеогрии для дальнейшего вывода подкатегории
-    setChoosedGeneralCategoryId(choosedCategoryId);
-    console.log(choosedPage[choosedGeneralCategoryId]?.dependsCategories);
+    const choosedCategory = currentCategory.find(
+      (item: any) => item?.url === url
+    ); // Ф-ция поиска выбранной катеогрии для дальнейшего вывода подкатегории
+    setAnimalCategories({
+      ...Object.fromEntries(animalCategories),
+      typeOfFood: choosedCategory?.generalNameCategory,
+    });
   }
+
   useEffect(() => {
-    dispatch(
-      addFoodCategories([
-        {
-          animalCategory: choosedPage[choosedGeneralCategoryId]?.animalCategory, //Добавляем выбранные категории в стейт
-          generalNameCategory:
-            choosedPage[choosedGeneralCategoryId]?.generalNameCategory,
-          slaveCategory: choosedSlaveCategory,
-        },
-      ])
+    const currentCategory = filterCategories?.filter(
+      (category) =>
+        category?.animalCategory === animalCategories.get("animalCategory")
     );
-  }, [choosedSlaveCategory]); // Добавление критерий для фильтра еды
+    setCurrentCategory(currentCategory);
+
+    const findDependedCategory = currentCategory?.find(
+      (item) => item?.generalNameCategory === animalCategories.get("typeOfFood")
+    );
+
+    if (findDependedCategory)
+      setChoosedGeneralCategory(findDependedCategory?.dependsCategories);
+  }, [animalCategories, filterCategories]);
+
   return (
     <div className="anymal-filter-block">
-      <h2 className="filter-block-name">{pageName}</h2>
+      <h2 className="filter-block-name">{currentCategory?.[0]?.namePage}</h2>
       <div className="filter-block-items">
-        {choosedPage.map((item: any) => (
+        {currentCategory?.map((item: any) => (
           <div
             className={active ? "filter-item" : "filter-item-disable"}
             key={item.url}
@@ -69,35 +54,21 @@ const AnimalTypeFilter = ({ namePage, filterCategories }: IAnymalFilter) => {
           >
             <AnymalItemFilter
               active={active}
-              setactive={setactive}
+              setactive={setActive}
               categories={item}
             />
           </div>
         ))}
         <>
-          {!active && !!choosedPage.length && (
-            <>
-              <div className="name-category">
-                {choosedPage[choosedGeneralCategoryId]?.filterName}
-              </div>
-              <div onClick={() => setactive(!active)} className="arrow-back">
-                <Svg type="arrowBack" />
-              </div>
-            </>
+          {!active && currentCategory.length && (
+            <DependedFilterCategories
+              key={Date.now()}
+              active={active}
+              choosedGeneralCategory={choosedGeneralCategory}
+              setActive={setActive}
+              setChoosedSlaveCategory={setChoosedSlaveCategory}
+            />
           )}
-          {!active &&
-            choosedPage[choosedGeneralCategoryId]?.dependsCategories.map(
-              // Логика работы раздельного фильтра
-              (items: any) => (
-                <div key={items.url} className="filter-item">
-                  <AnymalItemFilter
-                    active={active}
-                    categories={items}
-                    setChoosedSlaveCategory={setChoosedSlaveCategory}
-                  />
-                </div>
-              )
-            )}
         </>
       </div>
     </div>

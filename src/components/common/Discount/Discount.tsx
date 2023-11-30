@@ -2,7 +2,7 @@ import React from "react";
 import { ArrowLeft, ArrowRight } from "react-bootstrap-icons";
 import { useSearchParams } from "react-router-dom";
 import { UseAdv } from "../../../hooks/UseAdv";
-import { IMAGES_DISCOUNT } from "../../constants/contants";
+import { IMAGES_DISCOUNT } from "../../../constants/contants";
 const Discount = React.memo(() => {
   const { activeImage, generateActiveImageMap } = UseAdv(
     IMAGES_DISCOUNT,

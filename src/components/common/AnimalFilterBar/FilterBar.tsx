@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { FC } from "react";
 import { useSearchParams } from "react-router-dom";
-import { ANIMAL_CATEGORIES } from "../../constants/contants";
+import { ANIMAL_CATEGORIES } from "../../../constants/contants";
 
 const FilterBar: FC = () => {
   const [activeFilter, setActiveFilter] = useSearchParams();
